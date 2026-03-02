@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { useTarotStore } from "../../store/useTarotStore";
 import { buttonVariants } from "../../animations/variants";
 
+interface Props {
+  horizontal?: boolean;
+}
+
 const btnBase: React.CSSProperties = {
   display: "block",
   padding: "7px 16px",
@@ -19,11 +23,16 @@ const btnBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
-export function DeckControls() {
+export function DeckControls({ horizontal = false }: Props) {
   const { shuffleDeck, resetReading, isShuffling } = useTarotStore();
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center" }}>
+    <div style={{
+      display: "flex",
+      flexDirection: horizontal ? "row" : "column",
+      gap: horizontal ? 6 : 8,
+      alignItems: "center",
+    }}>
       <motion.button
         variants={buttonVariants}
         initial="idle"
@@ -35,6 +44,8 @@ export function DeckControls() {
           ...btnBase,
           opacity: isShuffling ? 0.4 : 1,
           borderColor: isShuffling ? "rgba(255,255,255,0.05)" : "rgba(99,102,241,0.2)",
+          padding: horizontal ? "6px 12px" : "7px 16px",
+          fontSize: horizontal ? 8 : 9,
         }}
       >
         {isShuffling ? "SHUFFLING" : "SHUFFLE"}
@@ -49,8 +60,9 @@ export function DeckControls() {
         style={{
           ...btnBase,
           color: "rgba(168,144,96,0.35)",
-          fontSize: 8,
+          fontSize: horizontal ? 8 : 8,
           letterSpacing: 2,
+          padding: horizontal ? "6px 10px" : "7px 16px",
         }}
       >
         RESET

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { DndContext, DragOverlay, PointerSensor, KeyboardSensor, useSensor, useSensors, type DragEndEvent, type DragStartEvent } from "@dnd-kit/core";
 import { motion, AnimatePresence } from "framer-motion";
 import { TableclothBackground } from "./background/TableclothBackground";
@@ -7,9 +8,34 @@ import { ReadingTable } from "./table/ReadingTable";
 import { CardShell } from "./card/CardShell";
 import { useTarotStore } from "../store/useTarotStore";
 import { spring } from "../animations/variants";
+import { getHashReading } from "../hooks/useReadingShare";
+import { SPREADS } from "../data/spreads";
+import type { PlacedCard } from "../store/useTarotStore";
 
 export default function TarotApp() {
-  const { setDragging, getDraggingCard, dealToSlot, returnCardToDeck, draggingCardId } = useTarotStore();
+  const { setDragging, getDraggingCard, dealToSlot, returnCardToDeck, draggingCardId, isViewOnly, loadSharedReading } = useTarotStore();
+
+  // Register service worker
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    }
+  }, []);
+
+  // Restore reading from URL hash (P2P share)
+  useEffect(() => {
+    const shared = getHashReading();
+    if (!shared) return;
+    const spread = SPREADS.find((s) => s.id === shared.s);
+    if (!spread) return;
+    const cards: PlacedCard[] = shared.c.map((c) => ({
+      cardId: c.i,
+      slotId: c.p,
+      isReversed: c.r,
+      isRevealed: c.v,
+    }));
+    loadSharedReading(spread, cards);
+  }, []);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -17,13 +43,14 @@ export default function TarotApp() {
   );
 
   function handleDragStart(e: DragStartEvent) {
+    if (isViewOnly) return;
     setDragging(String(e.active.id));
   }
 
   function handleDragEnd(e: DragEndEvent) {
     const { active, over } = e;
     setDragging(null);
-    if (!over) return;
+    if (!over || isViewOnly) return;
 
     const cardId = String(active.id);
     const overId = String(over.id);
@@ -43,7 +70,7 @@ export default function TarotApp() {
 
       <div style={{ position: "relative", zIndex: 1, width: "100%", height: "100%" }}>
         <DndContext
-          sensors={sensors}
+          sensors={isViewOnly ? [] : sensors}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
@@ -56,12 +83,12 @@ export default function TarotApp() {
             }}
           >
             <AnimatePresence>
-              {draggingCard && (
+              {draggingCard && !isViewOnly && (
                 <motion.div
                   initial={{ scale: 1 }}
                   animate={{ scale: 1.1 }}
                   style={{
-                    filter: "drop-shadow(0 16px 32px rgba(139,92,246,0.6))",
+                    filter: "drop-shadow(0 14px 28px rgba(99,102,241,0.5))",
                     cursor: "grabbing",
                   }}
                   transition={spring}

@@ -18,6 +18,7 @@ interface TarotState {
   draggingCardId: string | null;
   isShuffling: boolean;
   selectedCardId: string | null;
+  isViewOnly: boolean;
 
   shuffleDeck: () => void;
   dealToSlot: (cardId: string, slotId: string) => void;
@@ -27,6 +28,7 @@ interface TarotState {
   resetReading: () => void;
   setDragging: (cardId: string | null) => void;
   setSelected: (cardId: string | null) => void;
+  loadSharedReading: (spread: SpreadDefinition, cards: PlacedCard[]) => void;
   getDraggingCard: () => TarotCard | undefined;
   getCardById: (id: string) => TarotCard | undefined;
 }
@@ -47,6 +49,7 @@ export const useTarotStore = create<TarotState>((set, get) => ({
   draggingCardId: null,
   isShuffling: false,
   selectedCardId: null,
+  isViewOnly: false,
 
   shuffleDeck: () => {
     set({ isShuffling: true });
@@ -88,14 +91,25 @@ export const useTarotStore = create<TarotState>((set, get) => ({
     set({ activeSpread: spread, placedCards: [], selectedCardId: null }),
 
   resetReading: () =>
-    set({ deck: [...FULL_DECK], placedCards: [], draggingCardId: null, selectedCardId: null }),
+    set({ deck: [...FULL_DECK], placedCards: [], draggingCardId: null, selectedCardId: null, isViewOnly: false }),
 
   setDragging: (cardId) => set({ draggingCardId: cardId }),
 
   setSelected: (cardId) => set({ selectedCardId: cardId }),
 
+  loadSharedReading: (spread, cards) => {
+    const usedIds = new Set(cards.map((c) => c.cardId));
+    set({
+      activeSpread: spread,
+      placedCards: cards,
+      deck: FULL_DECK.filter((c) => !usedIds.has(c.id)),
+      selectedCardId: cards.find((c) => c.isRevealed)?.cardId ?? null,
+      isViewOnly: true,
+    });
+  },
+
   getDraggingCard: () => {
-    const { draggingCardId, deck } = get();
+    const { draggingCardId } = get();
     if (!draggingCardId) return undefined;
     return FULL_DECK.find((c) => c.id === draggingCardId);
   },

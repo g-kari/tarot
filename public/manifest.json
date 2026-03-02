@@ -1,0 +1,18 @@
+{
+  "name": "Tarot",
+  "short_name": "Tarot",
+  "description": "Interactive tarot card reading",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050609",
+  "theme_color": "#050609",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
