@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import { motion, AnimatePresence } from "framer-motion";
 import { DraggableCard } from "../card/DraggableCard";
@@ -22,6 +23,16 @@ export function DeckPile({ compact = false }: Props) {
   const W = Math.round(120 * scale);
   const H = Math.round(210 * scale);
 
+  // Pre-compute stable random offsets — recalculate only when shuffle state changes,
+  // NOT on every render (fixes twitching caused by Math.random() in JSX).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const shuffleOffsets = useMemo(() =>
+    Array.from({ length: VISIBLE_STACK }, () => ({
+      x: (Math.random() - 0.5) * 80,
+      y: (Math.random() - 0.5) * 30,
+      rotate: (Math.random() - 0.5) * 25,
+    })), [isShuffling]);
+
   return (
     <div style={{ display: "flex", alignItems: "center", gap: compact ? 10 : 0, flexDirection: compact ? "row" : "column" }}>
       <div
@@ -34,11 +45,7 @@ export function DeckPile({ compact = false }: Props) {
           return (
             <motion.div
               key={card.id}
-              animate={isShuffling ? {
-                x: (Math.random() - 0.5) * 80,
-                y: (Math.random() - 0.5) * 30,
-                rotate: (Math.random() - 0.5) * 25,
-              } : {
+              animate={isShuffling ? shuffleOffsets[i] : {
                 x: depth * 1.5,
                 y: depth * 1.5,
                 rotate: (depth - visible.length / 2) * 0.4,

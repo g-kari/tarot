@@ -13,10 +13,11 @@ interface Props {
   layoutId?: string;
   style?: React.CSSProperties;
   onClick?: () => void;
+  scale?: number;
 }
 
-export function CardShell({ card, isFaceUp, isReversed = false, layoutId, style, onClick }: Props) {
-  const W = 120, H = 210;
+export function CardShell({ card, isFaceUp, isReversed = false, layoutId, style, onClick, scale = 1 }: Props) {
+  const W = Math.round(120 * scale), H = Math.round(210 * scale);
 
   return (
     <motion.div

@@ -1,19 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { motion } from "framer-motion";
 import { SlotDropZone } from "./SlotDropZone";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import type { SpreadDefinition } from "../../data/spreads";
 
 interface Props {
   spread: SpreadDefinition;
 }
 
-const CARD_W = 120;
-const CARD_H = 210;
-
 export function SpreadLayout({ spread }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const cardScale = isMobile ? 0.72 : 1;
 
   return (
     <div
@@ -33,7 +32,7 @@ export function SpreadLayout({ spread }: Props) {
             top: `${slot.pos.y * 100}%`,
           }}
         >
-          <SlotDropZone slot={slot} />
+          <SlotDropZone slot={slot} scale={cardScale} />
         </div>
       ))}
     </div>

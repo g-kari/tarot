@@ -9,16 +9,17 @@ import type { SpreadSlot } from "../../data/spreads";
 
 interface Props {
   slot: SpreadSlot;
+  scale?: number;
 }
 
-export function SlotDropZone({ slot }: Props) {
+export function SlotDropZone({ slot, scale = 1 }: Props) {
   const { setNodeRef, isOver } = useDroppable({ id: slot.id });
   const { placedCards, revealCard, getCardById, setSelected } = useTarotStore();
 
   const placed = placedCards.find((p) => p.slotId === slot.id);
   const card = placed ? getCardById(placed.cardId) : undefined;
 
-  const W = 120, H = 210;
+  const W = Math.round(120 * scale), H = Math.round(210 * scale);
 
   return (
     <div
@@ -49,6 +50,7 @@ export function SlotDropZone({ slot }: Props) {
               isReversed={placed.isReversed}
               onClick={() => placed.isRevealed ? setSelected(card.id) : revealCard(card.id)}
               style={{ cursor: "pointer" }}
+              scale={scale}
             />
             {!placed.isRevealed && (
               <div style={{
