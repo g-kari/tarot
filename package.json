@@ -1,0 +1,35 @@
+{
+	"name": "tarot",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "vinext dev",
+		"build": "vinext build",
+		"start": "vinext start",
+		"preview": "vinext preview",
+		"deploy": "vinext deploy"
+	},
+	"dependencies": {
+		"@dnd-kit/core": "^6.3.1",
+		"@dnd-kit/utilities": "^3.2.2",
+		"clsx": "^2.1.1",
+		"framer-motion": "^12.34.4",
+		"react": "^19.2.4",
+		"react-dom": "^19.2.4",
+		"vite": "^7",
+		"vinext": "^0.0.18",
+		"zustand": "^5.0.11"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/react": "^19.1.5",
+		"@types/react-dom": "^19.1.5",
+		"eslint": "^9",
+		"eslint-config-next": "15.4.6",
+		"tailwindcss": "^4",
+		"typescript": "^5.7.4",
+		"wrangler": "^4.69.0"
+	}
+}
