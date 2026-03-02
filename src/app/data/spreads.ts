@@ -15,28 +15,28 @@ export interface SpreadDefinition {
 
 export const THREE_CARD: SpreadDefinition = {
   id: "three-card",
-  name: "Past · Present · Future",
+  name: "過去・現在・未来",
   slots: [
-    { id: "past",    label: "Past",    description: "What was",         pos: { x: 0.18, y: 0.5 } },
-    { id: "present", label: "Present", description: "What is",          pos: { x: 0.5,  y: 0.5 } },
-    { id: "future",  label: "Future",  description: "What will be",     pos: { x: 0.82, y: 0.5 } },
+    { id: "past",    label: "過去",  description: "あったこと",  pos: { x: 0.18, y: 0.5 } },
+    { id: "present", label: "現在",  description: "あること",    pos: { x: 0.5,  y: 0.5 } },
+    { id: "future",  label: "未来",  description: "なること",    pos: { x: 0.82, y: 0.5 } },
   ],
 };
 
 export const CELTIC_CROSS: SpreadDefinition = {
   id: "celtic-cross",
-  name: "Celtic Cross",
+  name: "ケルト十字",
   slots: [
-    { id: "heart",       label: "Heart",       description: "The heart of the matter",   pos: { x: 0.32, y: 0.5 } },
-    { id: "crossing",    label: "Crossing",    description: "What crosses you",           pos: { x: 0.32, y: 0.5 }, rotation: 90 },
-    { id: "foundation",  label: "Foundation",  description: "The basis",                  pos: { x: 0.32, y: 0.74 } },
-    { id: "recent-past", label: "Recent Past", description: "What is passing",            pos: { x: 0.16, y: 0.5 } },
-    { id: "crown",       label: "Crown",       description: "Possible outcome",           pos: { x: 0.32, y: 0.26 } },
-    { id: "near-future", label: "Near Future", description: "What approaches",            pos: { x: 0.48, y: 0.5 } },
-    { id: "self",        label: "Self",        description: "Your position",              pos: { x: 0.68, y: 0.74 } },
-    { id: "environment", label: "Environment", description: "External influences",        pos: { x: 0.68, y: 0.58 } },
-    { id: "hopes",       label: "Hopes/Fears", description: "Inner hopes and fears",      pos: { x: 0.68, y: 0.42 } },
-    { id: "outcome",     label: "Outcome",     description: "The final outcome",          pos: { x: 0.68, y: 0.26 } },
+    { id: "heart",       label: "中心",     description: "問題の核心",         pos: { x: 0.32, y: 0.5 } },
+    { id: "crossing",    label: "障害",     description: "あなたを遮るもの",   pos: { x: 0.32, y: 0.5 }, rotation: 90 },
+    { id: "foundation",  label: "土台",     description: "基盤",               pos: { x: 0.32, y: 0.74 } },
+    { id: "recent-past", label: "近い過去", description: "過ぎ去ること",       pos: { x: 0.16, y: 0.5 } },
+    { id: "crown",       label: "指針",     description: "可能性のある結果",   pos: { x: 0.32, y: 0.26 } },
+    { id: "near-future", label: "近い未来", description: "近づくもの",         pos: { x: 0.48, y: 0.5 } },
+    { id: "self",        label: "自己",     description: "あなたの立場",       pos: { x: 0.68, y: 0.74 } },
+    { id: "environment", label: "環境",     description: "外部の影響",         pos: { x: 0.68, y: 0.58 } },
+    { id: "hopes",       label: "希望と恐れ", description: "内なる希望と恐れ", pos: { x: 0.68, y: 0.42 } },
+    { id: "outcome",     label: "結末",     description: "最終的な結果",       pos: { x: 0.68, y: 0.26 } },
   ],
 };
 

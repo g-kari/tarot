@@ -48,7 +48,7 @@ export function DeckControls({ horizontal = false }: Props) {
           fontSize: horizontal ? 8 : 9,
         }}
       >
-        {isShuffling ? "SHUFFLING" : "SHUFFLE"}
+        {isShuffling ? "シャッフル中" : "シャッフル"}
       </motion.button>
 
       <motion.button
@@ -65,7 +65,7 @@ export function DeckControls({ horizontal = false }: Props) {
           padding: horizontal ? "6px 10px" : "7px 16px",
         }}
       >
-        RESET
+        リセット
       </motion.button>
     </div>
   );

@@ -70,7 +70,7 @@ export function CardMeaningPanel() {
               padding: "1px 5px",
               flexShrink: 0,
             }}>
-              {activePlaced.isReversed ? "REVERSED" : "UPRIGHT"}
+              {activePlaced.isReversed ? "逆位置" : "正位置"}
             </span>
           </div>
 

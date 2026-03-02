@@ -81,7 +81,7 @@ export function DeckPile({ compact = false }: Props) {
             fontFamily: "Cinzel, serif",
             letterSpacing: 1,
           }}>
-            EMPTY
+            空
           </div>
         )}
 

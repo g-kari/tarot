@@ -24,19 +24,19 @@ export function ReadingTable() {
   }, []);
 
   async function handleNotification() {
-    if (!("Notification" in window)) { showToast("Not supported"); return; }
-    if (Notification.permission === "denied") { showToast("Notifications blocked"); return; }
+    if (!("Notification" in window)) { showToast("未対応"); return; }
+    if (Notification.permission === "denied") { showToast("通知がブロック済み"); return; }
     if (Notification.permission === "default") {
       const perm = await Notification.requestPermission();
-      if (perm !== "granted") { showToast("Permission denied"); return; }
+      if (perm !== "granted") { showToast("権限が拒否されました"); return; }
     }
     const next = !notifEnabled;
     setNotifEnabled(next);
     if (next) {
-      new Notification("Tarot", { body: "Daily reading reminders enabled.", icon: "/favicon.svg" });
-      showToast("Notifications on");
+      new Notification("Tarot", { body: "毎日のリーディングリマインダーが有効です。", icon: "/favicon.svg" });
+      showToast("通知オン");
     } else {
-      showToast("Notifications off");
+      showToast("通知オフ");
     }
   }
 
@@ -63,7 +63,7 @@ export function ReadingTable() {
           color: isViewOnly ? "rgba(99,102,241,0.5)" : "rgba(168,144,96,0.6)",
         }}
       >
-        {isViewOnly ? "SHARED" : "TAROT"}
+        {isViewOnly ? "共有中" : "TAROT"}
       </motion.div>
 
       <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
@@ -89,7 +89,7 @@ export function ReadingTable() {
               opacity: 0.85,
             }}
           >
-            LIVE
+            ライブ
           </motion.button>
 
           <AnimatePresence>

@@ -17,28 +17,28 @@ export interface TarotCard {
 }
 
 const major: TarotCard[] = [
-  { id: "major-00", arcana: "major", name: "The Fool", number: 0, keywords: ["beginnings", "innocence", "spontaneity"], uprightMeaning: "New beginnings, optimism, trust in life", reversedMeaning: "Recklessness, risk-taking, lack of direction", primaryColor: "#f4d03f", secondaryColor: "#85c1e9" },
-  { id: "major-01", arcana: "major", name: "The Magician", number: 1, keywords: ["willpower", "desire", "creation"], uprightMeaning: "Power, skill, concentration, action", reversedMeaning: "Manipulation, cunning, untapped talents", primaryColor: "#e74c3c", secondaryColor: "#f39c12" },
-  { id: "major-02", arcana: "major", name: "The High Priestess", number: 2, keywords: ["intuition", "mystery", "inner knowledge"], uprightMeaning: "Intuition, mystery, subconscious mind", reversedMeaning: "Hidden agendas, misuse of knowledge", primaryColor: "#1a5276", secondaryColor: "#a9cce3" },
-  { id: "major-03", arcana: "major", name: "The Empress", number: 3, keywords: ["fertility", "nature", "abundance"], uprightMeaning: "Femininity, beauty, nature, nurturing", reversedMeaning: "Creative block, dependence on others", primaryColor: "#1e8449", secondaryColor: "#a9dfbf" },
-  { id: "major-04", arcana: "major", name: "The Emperor", number: 4, keywords: ["authority", "structure", "control"], uprightMeaning: "Fatherhood, authority, stability, law", reversedMeaning: "Domination, rigidity, lack of discipline", primaryColor: "#c0392b", secondaryColor: "#cd6155" },
-  { id: "major-05", arcana: "major", name: "The Hierophant", number: 5, keywords: ["tradition", "conformity", "spiritual wisdom"], uprightMeaning: "Tradition, belief systems, conformity", reversedMeaning: "Rebellion, subversiveness, new approaches", primaryColor: "#9b59b6", secondaryColor: "#d7bde2" },
-  { id: "major-06", arcana: "major", name: "The Lovers", number: 6, keywords: ["love", "union", "choice"], uprightMeaning: "Love, harmony, relationships, values", reversedMeaning: "Disharmony, imbalance, misalignment", primaryColor: "#f39c12", secondaryColor: "#f9e79f" },
-  { id: "major-07", arcana: "major", name: "The Chariot", number: 7, keywords: ["control", "willpower", "victory"], uprightMeaning: "Control, willpower, success, action", reversedMeaning: "Lack of control, lack of direction", primaryColor: "#2471a3", secondaryColor: "#7fb3d3" },
-  { id: "major-08", arcana: "major", name: "Strength", number: 8, keywords: ["courage", "persuasion", "patience"], uprightMeaning: "Strength, courage, patience, control", reversedMeaning: "Weakness, self-doubt, lack of discipline", primaryColor: "#d35400", secondaryColor: "#f0b27a" },
-  { id: "major-09", arcana: "major", name: "The Hermit", number: 9, keywords: ["introspection", "soul-searching", "wisdom"], uprightMeaning: "Soul searching, introspection, being alone", reversedMeaning: "Isolation, loneliness, withdrawal", primaryColor: "#717d7e", secondaryColor: "#d5d8dc" },
-  { id: "major-10", arcana: "major", name: "Wheel of Fortune", number: 10, keywords: ["luck", "fate", "change"], uprightMeaning: "Good luck, karma, life cycles, destiny", reversedMeaning: "Bad luck, lack of control, clinging to control", primaryColor: "#8e44ad", secondaryColor: "#d2b4de" },
-  { id: "major-11", arcana: "major", name: "Justice", number: 11, keywords: ["fairness", "truth", "law"], uprightMeaning: "Justice, fairness, truth, cause and effect", reversedMeaning: "Unfairness, lack of accountability", primaryColor: "#2e86c1", secondaryColor: "#aed6f1" },
-  { id: "major-12", arcana: "major", name: "The Hanged Man", number: 12, keywords: ["suspension", "restriction", "letting go"], uprightMeaning: "Suspension, restriction, letting go, sacrifice", reversedMeaning: "Martyrdom, indecision, delay", primaryColor: "#1e8449", secondaryColor: "#82e0aa" },
-  { id: "major-13", arcana: "major", name: "Death", number: 13, keywords: ["endings", "change", "transformation"], uprightMeaning: "Endings, change, transformation, transition", reversedMeaning: "Resistance to change, personal transformation", primaryColor: "#1c2833", secondaryColor: "#5d6d7e" },
-  { id: "major-14", arcana: "major", name: "Temperance", number: 14, keywords: ["balance", "moderation", "patience"], uprightMeaning: "Balance, moderation, patience, purpose", reversedMeaning: "Imbalance, excess, self-healing", primaryColor: "#1a5276", secondaryColor: "#f0b27a" },
-  { id: "major-15", arcana: "major", name: "The Devil", number: 15, keywords: ["shadow self", "attachment", "addiction"], uprightMeaning: "Shadow self, attachment, addiction, materialism", reversedMeaning: "Releasing limiting beliefs, exploring dark thoughts", primaryColor: "#922b21", secondaryColor: "#1c2833" },
-  { id: "major-16", arcana: "major", name: "The Tower", number: 16, keywords: ["sudden change", "upheaval", "chaos"], uprightMeaning: "Sudden change, upheaval, chaos, revelation", reversedMeaning: "Personal transformation, fear of change", primaryColor: "#784212", secondaryColor: "#d35400" },
-  { id: "major-17", arcana: "major", name: "The Star", number: 17, keywords: ["hope", "faith", "rejuvenation"], uprightMeaning: "Hope, faith, purpose, renewal, spirituality", reversedMeaning: "Lack of faith, despair, self-trust", primaryColor: "#1a5276", secondaryColor: "#f4d03f" },
-  { id: "major-18", arcana: "major", name: "The Moon", number: 18, keywords: ["illusion", "fear", "subconscious"], uprightMeaning: "Illusion, fear, the subconscious, confusion", reversedMeaning: "Release of fear, repressed emotion", primaryColor: "#154360", secondaryColor: "#aab7b8" },
-  { id: "major-19", arcana: "major", name: "The Sun", number: 19, keywords: ["positivity", "fun", "warmth"], uprightMeaning: "Positivity, fun, warmth, success, vitality", reversedMeaning: "Inner child, feeling down, overly optimistic", primaryColor: "#f39c12", secondaryColor: "#f7dc6f" },
-  { id: "major-20", arcana: "major", name: "Judgement", number: 20, keywords: ["judgment", "rebirth", "inner calling"], uprightMeaning: "Reflection, reckoning, awakening, absolution", reversedMeaning: "Inability to forgive yourself, self-doubt", primaryColor: "#922b21", secondaryColor: "#f4d03f" },
-  { id: "major-21", arcana: "major", name: "The World", number: 21, keywords: ["completion", "integration", "accomplishment"], uprightMeaning: "Completion, integration, accomplishment", reversedMeaning: "Seeking personal closure, delays", primaryColor: "#1a5276", secondaryColor: "#1e8449" },
+  { id: "major-00", arcana: "major", name: "愚者",       number: 0,  keywords: ["始まり", "純粋", "自発性"],      uprightMeaning: "新たな始まり、楽観主義、人生への信頼",     reversedMeaning: "無謀さ、リスク、方向性の欠如",           primaryColor: "#f4d03f", secondaryColor: "#85c1e9" },
+  { id: "major-01", arcana: "major", name: "魔術師",     number: 1,  keywords: ["意志力", "欲望", "創造"],         uprightMeaning: "力、技術、集中力、行動",                   reversedMeaning: "操作、狡猾さ、未開発の才能",             primaryColor: "#e74c3c", secondaryColor: "#f39c12" },
+  { id: "major-02", arcana: "major", name: "女教皇",     number: 2,  keywords: ["直感", "神秘", "内なる知"],       uprightMeaning: "直感、神秘、潜在意識",                     reversedMeaning: "隠れた意図、知識の乱用",                 primaryColor: "#1a5276", secondaryColor: "#a9cce3" },
+  { id: "major-03", arcana: "major", name: "女帝",       number: 3,  keywords: ["豊穣", "自然", "豊かさ"],         uprightMeaning: "女性性、美、自然、育み",                   reversedMeaning: "創造の阻害、他者への依存",               primaryColor: "#1e8449", secondaryColor: "#a9dfbf" },
+  { id: "major-04", arcana: "major", name: "皇帝",       number: 4,  keywords: ["権威", "構造", "統制"],           uprightMeaning: "父性、権威、安定、法",                     reversedMeaning: "支配、硬直性、規律の欠如",               primaryColor: "#c0392b", secondaryColor: "#cd6155" },
+  { id: "major-05", arcana: "major", name: "法王",       number: 5,  keywords: ["伝統", "従順", "霊的知恵"],       uprightMeaning: "伝統、信仰体系、従順",                     reversedMeaning: "反抗、破壊的行動、新しいアプローチ",     primaryColor: "#9b59b6", secondaryColor: "#d7bde2" },
+  { id: "major-06", arcana: "major", name: "恋人",       number: 6,  keywords: ["愛", "結合", "選択"],             uprightMeaning: "愛、調和、人間関係、価値観",               reversedMeaning: "不和、アンバランス、方向性のズレ",       primaryColor: "#f39c12", secondaryColor: "#f9e79f" },
+  { id: "major-07", arcana: "major", name: "戦車",       number: 7,  keywords: ["統制", "意志力", "勝利"],         uprightMeaning: "統制、意志力、成功、行動",                 reversedMeaning: "統制の欠如、方向性の欠如",               primaryColor: "#2471a3", secondaryColor: "#7fb3d3" },
+  { id: "major-08", arcana: "major", name: "力",         number: 8,  keywords: ["勇気", "説得", "忍耐"],           uprightMeaning: "強さ、勇気、忍耐、統制",                   reversedMeaning: "弱さ、自己不信、規律の欠如",             primaryColor: "#d35400", secondaryColor: "#f0b27a" },
+  { id: "major-09", arcana: "major", name: "隠者",       number: 9,  keywords: ["内省", "魂の探求", "知恵"],       uprightMeaning: "魂の探求、内省、孤独",                     reversedMeaning: "孤立、孤独、引きこもり",                 primaryColor: "#717d7e", secondaryColor: "#d5d8dc" },
+  { id: "major-10", arcana: "major", name: "運命の輪",   number: 10, keywords: ["幸運", "運命", "変化"],           uprightMeaning: "幸運、カルマ、生命の循環、運命",           reversedMeaning: "不運、統制の欠如、執着",                 primaryColor: "#8e44ad", secondaryColor: "#d2b4de" },
+  { id: "major-11", arcana: "major", name: "正義",       number: 11, keywords: ["公正", "真実", "法"],             uprightMeaning: "正義、公正さ、真実、因果",                 reversedMeaning: "不公正、無責任",                         primaryColor: "#2e86c1", secondaryColor: "#aed6f1" },
+  { id: "major-12", arcana: "major", name: "吊られた男", number: 12, keywords: ["停止", "制限", "手放し"],         uprightMeaning: "停止、制限、手放し、犠牲",                 reversedMeaning: "殉教、優柔不断、遅延",                   primaryColor: "#1e8449", secondaryColor: "#82e0aa" },
+  { id: "major-13", arcana: "major", name: "死神",       number: 13, keywords: ["終わり", "変化", "変容"],         uprightMeaning: "終わり、変化、変容、転換",                 reversedMeaning: "変化への抵抗、個人的な変容",             primaryColor: "#1c2833", secondaryColor: "#5d6d7e" },
+  { id: "major-14", arcana: "major", name: "節制",       number: 14, keywords: ["バランス", "節度", "忍耐"],       uprightMeaning: "バランス、節度、忍耐、目的",               reversedMeaning: "不均衡、過剰、自己癒し",                 primaryColor: "#1a5276", secondaryColor: "#f0b27a" },
+  { id: "major-15", arcana: "major", name: "悪魔",       number: 15, keywords: ["影の自己", "執着", "依存"],       uprightMeaning: "影の自己、執着、依存、物質主義",           reversedMeaning: "制限的な信念の解放、暗い思考の探求",     primaryColor: "#922b21", secondaryColor: "#1c2833" },
+  { id: "major-16", arcana: "major", name: "塔",         number: 16, keywords: ["突然の変化", "激変", "混乱"],     uprightMeaning: "突然の変化、激変、混乱、啓示",             reversedMeaning: "個人的変容、変化への恐れ",               primaryColor: "#784212", secondaryColor: "#d35400" },
+  { id: "major-17", arcana: "major", name: "星",         number: 17, keywords: ["希望", "信念", "再生"],           uprightMeaning: "希望、信念、目的、刷新、霊性",             reversedMeaning: "信念の欠如、絶望、自己信頼",             primaryColor: "#1a5276", secondaryColor: "#f4d03f" },
+  { id: "major-18", arcana: "major", name: "月",         number: 18, keywords: ["幻想", "恐れ", "潜在意識"],       uprightMeaning: "幻想、恐れ、潜在意識、混乱",               reversedMeaning: "恐れの解放、抑圧された感情",             primaryColor: "#154360", secondaryColor: "#aab7b8" },
+  { id: "major-19", arcana: "major", name: "太陽",       number: 19, keywords: ["前向き", "楽しみ", "温かみ"],     uprightMeaning: "前向きさ、楽しみ、温かみ、成功、活力",     reversedMeaning: "内なる子、落ち込み、過度の楽観",         primaryColor: "#f39c12", secondaryColor: "#f7dc6f" },
+  { id: "major-20", arcana: "major", name: "審判",       number: 20, keywords: ["審判", "再誕", "内なる呼び声"],   uprightMeaning: "内省、審判、覚醒、赦免",                   reversedMeaning: "自己を許せないこと、自己不信",           primaryColor: "#922b21", secondaryColor: "#f4d03f" },
+  { id: "major-21", arcana: "major", name: "世界",       number: 21, keywords: ["完成", "統合", "達成"],           uprightMeaning: "完成、統合、達成",                         reversedMeaning: "個人的な完結の追求、遅延",               primaryColor: "#1a5276", secondaryColor: "#1e8449" },
 ];
 
 const SUIT_COLORS: Record<Suit, [string, string]> = {
@@ -49,17 +49,24 @@ const SUIT_COLORS: Record<Suit, [string, string]> = {
 };
 
 const SUIT_KEYWORDS: Record<Suit, string[]> = {
-  wands:     ["fire", "passion", "creativity"],
-  cups:      ["water", "emotion", "intuition"],
-  swords:    ["air", "mind", "conflict"],
-  pentacles: ["earth", "material", "work"],
+  wands:     ["火", "情熱", "創造"],
+  cups:      ["水", "感情", "直感"],
+  swords:    ["風", "思考", "葛藤"],
+  pentacles: ["地", "物質", "労働"],
+};
+
+const SUIT_LABELS_JA: Record<Suit, string> = {
+  wands:     "ワンド",
+  cups:      "カップ",
+  swords:    "ソード",
+  pentacles: "ペンタクル",
 };
 
 const COURT: Array<{ rank: CourtRank; label: string }> = [
-  { rank: "page",   label: "Page"   },
-  { rank: "knight", label: "Knight" },
-  { rank: "queen",  label: "Queen"  },
-  { rank: "king",   label: "King"   },
+  { rank: "page",   label: "ペイジ"   },
+  { rank: "knight", label: "ナイト"   },
+  { rank: "queen",  label: "クイーン" },
+  { rank: "king",   label: "キング"   },
 ];
 
 function buildMinor(): TarotCard[] {
@@ -69,20 +76,20 @@ function buildMinor(): TarotCard[] {
   for (const suit of suits) {
     const [pc, sc] = SUIT_COLORS[suit];
     const kw = SUIT_KEYWORDS[suit];
-    const suitLabel = suit.charAt(0).toUpperCase() + suit.slice(1);
+    const suitLabel = SUIT_LABELS_JA[suit];
 
     // Pip cards 1-10
     for (let n = 1; n <= 10; n++) {
-      const rankLabel = n === 1 ? "Ace" : String(n);
+      const rankLabel = n === 1 ? "エース" : String(n);
       cards.push({
         id: `minor-${suit}-${n}`,
         arcana: "minor",
-        name: n === 1 ? `Ace of ${suitLabel}` : `${n} of ${suitLabel}`,
+        name: `${suitLabel}の${rankLabel}`,
         number: n,
         suit,
         keywords: kw,
-        uprightMeaning: `${rankLabel} of ${suitLabel} energy`,
-        reversedMeaning: `Blocked ${suitLabel.toLowerCase()} energy`,
+        uprightMeaning: `${suitLabel}のエネルギー`,
+        reversedMeaning: `${suitLabel}のエネルギーの停滞`,
         primaryColor: pc,
         secondaryColor: sc,
       });
@@ -93,13 +100,13 @@ function buildMinor(): TarotCard[] {
       cards.push({
         id: `minor-${suit}-${rank}`,
         arcana: "minor",
-        name: `${label} of ${suitLabel}`,
+        name: `${suitLabel}の${label}`,
         number: 11 + COURT.findIndex((c) => c.rank === rank),
         suit,
         courtRank: rank,
         keywords: kw,
-        uprightMeaning: `${label} ${suitLabel.toLowerCase()} qualities`,
-        reversedMeaning: `Immature ${suitLabel.toLowerCase()} energy`,
+        uprightMeaning: `${label}の${suitLabel}的資質`,
+        reversedMeaning: `未熟な${suitLabel}のエネルギー`,
         primaryColor: pc,
         secondaryColor: sc,
       });

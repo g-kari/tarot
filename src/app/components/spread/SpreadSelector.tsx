@@ -35,7 +35,7 @@ export function SpreadSelector() {
               transition: "border-color 0.2s, color 0.2s",
             }}
           >
-            {spread.name.toUpperCase()}
+            {spread.name}
           </motion.button>
         );
       })}

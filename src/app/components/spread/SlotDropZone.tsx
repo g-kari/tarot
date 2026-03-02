@@ -80,7 +80,7 @@ export function SlotDropZone({ slot }: Props) {
                 whiteSpace: "nowrap",
                 pointerEvents: "none",
               }}>
-                ↕ REV
+                ↕ 逆位置
               </div>
             )}
           </motion.div>

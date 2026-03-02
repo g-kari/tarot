@@ -73,7 +73,7 @@ function CopyField({ value, label }: { value: string; label: string }) {
           style={{ ...inputStyle, flex: 1, cursor: "default" }}
         />
         <button onClick={copy} style={{ ...btnStyle, flexShrink: 0 }}>
-          {copied ? "✓" : "COPY"}
+          {copied ? "✓" : "コピー"}
         </button>
       </div>
     </div>
@@ -108,10 +108,10 @@ export function PeerPanel({ onClose }: Props) {
 
   const statusLabel =
     status === "idle" ? "" :
-    status === "hosting" ? "Waiting for guest…" :
-    status === "joining" ? "Generating answer…" :
-    status === "connected" ? "Connected" :
-    "Disconnected";
+    status === "hosting" ? "ゲストを待っています…" :
+    status === "joining" ? "アンサーを生成中…" :
+    status === "connected" ? "接続済み" :
+    "切断されました";
 
   return (
     <motion.div
@@ -124,7 +124,7 @@ export function PeerPanel({ onClose }: Props) {
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
         <span style={{ fontFamily: "Cinzel, serif", fontSize: 9, letterSpacing: 3, color: "rgba(168,144,96,0.6)" }}>
-          LIVE SHARE
+          ライブ共有
         </span>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           {statusLabel && (
@@ -140,10 +140,10 @@ export function PeerPanel({ onClose }: Props) {
       {status === "connected" && (
         <div style={{ textAlign: "center", paddingBottom: 8 }}>
           <div style={{ fontSize: 10, color: "rgba(204,200,192,0.5)", fontFamily: "EB Garamond, serif", marginBottom: 10 }}>
-            {isHost ? "Syncing reading to guest in real time." : "Viewing host's reading."}
+            {isHost ? "リーディングをゲストにリアルタイム同期中。" : "ホストのリーディングを閲覧中。"}
           </div>
           <button onClick={disconnect} style={{ ...btnStyle, borderColor: "rgba(220,80,80,0.3)", color: "rgba(220,80,80,0.6)" }}>
-            DISCONNECT
+            切断
           </button>
         </div>
       )}
@@ -152,9 +152,9 @@ export function PeerPanel({ onClose }: Props) {
       {status === "disconnected" && (
         <div style={{ textAlign: "center", paddingBottom: 8 }}>
           <div style={{ fontSize: 10, color: "rgba(220,80,80,0.5)", fontFamily: "EB Garamond, serif", marginBottom: 10 }}>
-            Connection closed.
+            接続が切断されました。
           </div>
-          <button onClick={disconnect} style={btnStyle}>CLOSE</button>
+          <button onClick={disconnect} style={btnStyle}>閉じる</button>
         </div>
       )}
 
@@ -174,7 +174,7 @@ export function PeerPanel({ onClose }: Props) {
                   color: mode === m ? "rgba(168,144,96,0.85)" : "rgba(168,144,96,0.35)",
                 }}
               >
-                {m === "host" ? "HOST" : "JOIN"}
+                {m === "host" ? "ホスト" : "参加"}
               </button>
             ))}
           </div>
@@ -182,7 +182,7 @@ export function PeerPanel({ onClose }: Props) {
           {mode === "host" && (
             <>
               <div style={{ fontSize: 10, color: "rgba(204,200,192,0.45)", fontFamily: "EB Garamond, serif", marginBottom: 10, lineHeight: 1.5 }}>
-                Share your offer code with the guest. Once they send back an answer code, paste it below.
+                オファーコードをゲストに共有してください。アンサーコードが返ってきたら、下に貼り付けてください。
               </div>
 
               {!offerCode ? (
@@ -191,18 +191,18 @@ export function PeerPanel({ onClose }: Props) {
                   disabled={status === "hosting"}
                   style={{ ...btnStyle, width: "100%", opacity: status === "hosting" ? 0.5 : 1 }}
                 >
-                  {status === "hosting" ? "GENERATING…" : "CREATE OFFER"}
+                  {status === "hosting" ? "生成中…" : "オファーを作成"}
                 </button>
               ) : (
                 <>
-                  <CopyField value={offerCode} label="OFFER CODE — send to guest" />
-                  <span style={labelStyle}>ANSWER CODE — paste from guest</span>
+                  <CopyField value={offerCode} label="オファーコード — ゲストに送信" />
+                  <span style={labelStyle}>アンサーコード — ゲストから貼り付け</span>
                   <div style={{ display: "flex", gap: 5 }}>
                     <textarea
                       rows={2}
                       value={answerInput}
                       onChange={(e) => setAnswerInput(e.target.value)}
-                      placeholder="Paste answer code here…"
+                      placeholder="アンサーコードをここに貼り付け…"
                       style={{ ...inputStyle, flex: 1 }}
                     />
                     <button
@@ -210,7 +210,7 @@ export function PeerPanel({ onClose }: Props) {
                       disabled={!answerInput.trim()}
                       style={{ ...btnStyle, flexShrink: 0, opacity: answerInput.trim() ? 1 : 0.4 }}
                     >
-                      JOIN
+                      参加
                     </button>
                   </div>
                 </>
@@ -221,18 +221,18 @@ export function PeerPanel({ onClose }: Props) {
           {mode === "join" && (
             <>
               <div style={{ fontSize: 10, color: "rgba(204,200,192,0.45)", fontFamily: "EB Garamond, serif", marginBottom: 10, lineHeight: 1.5 }}>
-                Paste the host's offer code, then share your answer code back.
+                ホストのオファーコードを貼り付け、アンサーコードを返してください。
               </div>
 
               {!answerCode ? (
                 <>
-                  <span style={labelStyle}>OFFER CODE — paste from host</span>
+                  <span style={labelStyle}>オファーコード — ホストから貼り付け</span>
                   <div style={{ display: "flex", gap: 5, marginBottom: 8 }}>
                     <textarea
                       rows={2}
                       value={offerInput}
                       onChange={(e) => setOfferInput(e.target.value)}
-                      placeholder="Paste offer code here…"
+                      placeholder="オファーコードをここに貼り付け…"
                       style={{ ...inputStyle, flex: 1 }}
                     />
                     <button
@@ -240,12 +240,12 @@ export function PeerPanel({ onClose }: Props) {
                       disabled={!offerInput.trim() || status === "joining"}
                       style={{ ...btnStyle, flexShrink: 0, opacity: offerInput.trim() && status !== "joining" ? 1 : 0.4 }}
                     >
-                      {status === "joining" ? "…" : "CONNECT"}
+                      {status === "joining" ? "…" : "接続"}
                     </button>
                   </div>
                 </>
               ) : (
-                <CopyField value={answerCode} label="ANSWER CODE — send to host" />
+                <CopyField value={answerCode} label="アンサーコード — ホストに送信" />
               )}
             </>
           )}
