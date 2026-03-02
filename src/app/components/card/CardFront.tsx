@@ -24,7 +24,7 @@ export function CardFront({ card, isReversed = false }: Props) {
 
   return (
     <svg
-      width={W} height={H}
+      width="100%" height="100%"
       viewBox={`0 0 ${W} ${H}`}
       style={{ display: "block", transform: isReversed ? "rotate(180deg)" : undefined }}
     >

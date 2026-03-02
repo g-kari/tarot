@@ -3,7 +3,7 @@ export function CardBack() {
   const cx = W / 2, cy = H / 2;
 
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ display: "block" }}>
+    <svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} style={{ display: "block" }}>
       <defs>
         <radialGradient id="backGrad" cx="50%" cy="50%" r="60%">
           <stop offset="0%"  stopColor="#111420" />
