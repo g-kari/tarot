@@ -39,16 +39,16 @@ export function CardMeaningPanel() {
         >
           {/* Header row */}
           <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 8 }}>
-            {slot && (
+            {(slot || activeSpread.slots.length === 0) && (
               <span style={{
                 fontFamily: "Cinzel, serif",
                 fontSize: 7,
                 letterSpacing: 3,
-                color: "rgba(99,102,241,0.45)",
+                color: slot ? "rgba(99,102,241,0.45)" : "rgba(168,144,96,0.3)",
                 textTransform: "uppercase",
                 flexShrink: 0,
               }}>
-                {slot.label}
+                {slot ? slot.label : "自由配置"}
               </span>
             )}
             <span style={{

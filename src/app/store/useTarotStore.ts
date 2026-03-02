@@ -9,6 +9,7 @@ export interface PlacedCard {
   slotId: string;
   isReversed: boolean;
   isRevealed: boolean;
+  freePos?: { x: number; y: number };
 }
 
 interface TarotState {
@@ -28,6 +29,8 @@ interface TarotState {
   resetReading: () => void;
   setDragging: (cardId: string | null) => void;
   setSelected: (cardId: string | null) => void;
+  placeCardFree: (cardId: string, pos: { x: number; y: number }) => void;
+  moveCard: (cardId: string, pos: { x: number; y: number }) => void;
   loadSharedReading: (spread: SpreadDefinition, cards: PlacedCard[]) => void;
   getDraggingCard: () => TarotCard | undefined;
   getCardById: (id: string) => TarotCard | undefined;
@@ -96,6 +99,27 @@ export const useTarotStore = create<TarotState>((set, get) => ({
   setDragging: (cardId) => set({ draggingCardId: cardId }),
 
   setSelected: (cardId) => set({ selectedCardId: cardId }),
+
+  placeCardFree: (cardId, pos) => {
+    set((s) => {
+      const isReversed = Math.random() < 0.25;
+      return {
+        deck: s.deck.filter((c) => c.id !== cardId),
+        placedCards: [
+          ...s.placedCards,
+          { cardId, slotId: `free-${cardId}`, isReversed, isRevealed: false, freePos: pos },
+        ],
+      };
+    });
+  },
+
+  moveCard: (cardId, pos) => {
+    set((s) => ({
+      placedCards: s.placedCards.map((p) =>
+        p.cardId === cardId ? { ...p, freePos: pos } : p
+      ),
+    }));
+  },
 
   loadSharedReading: (spread, cards) => {
     const usedIds = new Set(cards.map((c) => c.cardId));

@@ -40,4 +40,10 @@ export const CELTIC_CROSS: SpreadDefinition = {
   ],
 };
 
-export const SPREADS: SpreadDefinition[] = [THREE_CARD, CELTIC_CROSS];
+export const FREE_PLACEMENT: SpreadDefinition = {
+  id: "free-placement",
+  name: "自由配置",
+  slots: [],
+};
+
+export const SPREADS: SpreadDefinition[] = [THREE_CARD, CELTIC_CROSS, FREE_PLACEMENT];

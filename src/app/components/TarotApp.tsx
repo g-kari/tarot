@@ -10,7 +10,11 @@ import { useTarotStore } from "../store/useTarotStore";
 import { spring } from "../animations/variants";
 
 export default function TarotApp() {
-  const { setDragging, getDraggingCard, dealToSlot, returnCardToDeck, draggingCardId, isViewOnly } = useTarotStore();
+  const {
+    setDragging, getDraggingCard, dealToSlot, returnCardToDeck,
+    placeCardFree, moveCard,
+    placedCards, draggingCardId, isViewOnly, activeSpread,
+  } = useTarotStore();
 
   // Register service worker
   useEffect(() => {
@@ -39,12 +43,33 @@ export default function TarotApp() {
 
     if (overId === "deck-pile") {
       returnCardToDeck(cardId);
-    } else {
-      dealToSlot(cardId, overId);
+      return;
     }
+
+    if (overId === "free-surface") {
+      const surfaceRect = over.rect;
+      const activeRect = active.rect.current.translated;
+      if (surfaceRect && activeRect) {
+        const cx = activeRect.left + activeRect.width / 2;
+        const cy = activeRect.top + activeRect.height / 2;
+        const pos = {
+          x: Math.max(0.05, Math.min(0.95, (cx - surfaceRect.left) / surfaceRect.width)),
+          y: Math.max(0.05, Math.min(0.95, (cy - surfaceRect.top) / surfaceRect.height)),
+        };
+        if (active.data.current?.isPlaced) {
+          moveCard(cardId, pos);
+        } else {
+          placeCardFree(cardId, pos);
+        }
+      }
+      return;
+    }
+
+    dealToSlot(cardId, overId);
   }
 
   const draggingCard = getDraggingCard();
+  const draggingPlaced = placedCards.find((p) => p.cardId === draggingCardId);
 
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative", overflow: "hidden" }}>
@@ -75,7 +100,11 @@ export default function TarotApp() {
                   }}
                   transition={spring}
                 >
-                  <CardShell card={draggingCard} isFaceUp={false} />
+                  <CardShell
+                    card={draggingCard}
+                    isFaceUp={draggingPlaced?.isRevealed ?? false}
+                    isReversed={draggingPlaced?.isReversed ?? false}
+                  />
                 </motion.div>
               )}
             </AnimatePresence>

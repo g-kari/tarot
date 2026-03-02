@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { SlotDropZone } from "./SlotDropZone";
+import { FreeDropSurface } from "./FreeDropSurface";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import type { SpreadDefinition } from "../../data/spreads";
 
@@ -23,18 +24,22 @@ export function SpreadLayout({ spread }: Props) {
         height: "100%",
       }}
     >
-      {spread.slots.map((slot) => (
-        <div
-          key={slot.id}
-          style={{
-            position: "absolute",
-            left: `${slot.pos.x * 100}%`,
-            top: `${slot.pos.y * 100}%`,
-          }}
-        >
-          <SlotDropZone slot={slot} scale={cardScale} />
-        </div>
-      ))}
+      {spread.slots.length === 0 ? (
+        <FreeDropSurface />
+      ) : (
+        spread.slots.map((slot) => (
+          <div
+            key={slot.id}
+            style={{
+              position: "absolute",
+              left: `${slot.pos.x * 100}%`,
+              top: `${slot.pos.y * 100}%`,
+            }}
+          >
+            <SlotDropZone slot={slot} scale={cardScale} />
+          </div>
+        ))
+      )}
     </div>
   );
 }
