@@ -4,6 +4,7 @@ import { SpreadLayout } from "../spread/SpreadLayout";
 import { DeckPile } from "../deck/DeckPile";
 import { DeckControls } from "../deck/DeckControls";
 import { SpreadSelector } from "../spread/SpreadSelector";
+import { CardMeaningPanel } from "../card/CardMeaningPanel";
 import { useTarotStore } from "../../store/useTarotStore";
 import { motion } from "framer-motion";
 
@@ -93,6 +94,7 @@ export function ReadingTable() {
           </motion.div>
 
           <SpreadLayout spread={activeSpread} />
+          <CardMeaningPanel />
         </div>
       </div>
 

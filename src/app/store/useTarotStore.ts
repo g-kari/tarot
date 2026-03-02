@@ -80,14 +80,15 @@ export const useTarotStore = create<TarotState>((set, get) => ({
       placedCards: s.placedCards.map((p) =>
         p.cardId === cardId ? { ...p, isRevealed: true } : p
       ),
+      selectedCardId: cardId,
     }));
   },
 
   setActiveSpread: (spread) =>
-    set({ activeSpread: spread, placedCards: [] }),
+    set({ activeSpread: spread, placedCards: [], selectedCardId: null }),
 
   resetReading: () =>
-    set({ deck: [...FULL_DECK], placedCards: [], draggingCardId: null }),
+    set({ deck: [...FULL_DECK], placedCards: [], draggingCardId: null, selectedCardId: null }),
 
   setDragging: (cardId) => set({ draggingCardId: cardId }),
 

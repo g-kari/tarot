@@ -13,7 +13,7 @@ interface Props {
 
 export function SlotDropZone({ slot }: Props) {
   const { setNodeRef, isOver } = useDroppable({ id: slot.id });
-  const { placedCards, revealCard, getCardById } = useTarotStore();
+  const { placedCards, revealCard, getCardById, setSelected } = useTarotStore();
 
   const placed = placedCards.find((p) => p.slotId === slot.id);
   const card = placed ? getCardById(placed.cardId) : undefined;
@@ -47,8 +47,8 @@ export function SlotDropZone({ slot }: Props) {
               card={card}
               isFaceUp={placed.isRevealed}
               isReversed={placed.isReversed}
-              onClick={() => !placed.isRevealed && revealCard(card.id)}
-              style={{ cursor: placed.isRevealed ? "default" : "pointer" }}
+              onClick={() => placed.isRevealed ? setSelected(card.id) : revealCard(card.id)}
+              style={{ cursor: "pointer" }}
             />
             {!placed.isRevealed && (
               <div style={{
@@ -65,6 +65,22 @@ export function SlotDropZone({ slot }: Props) {
                     background: "radial-gradient(circle, rgba(168,144,96,0.35) 0%, transparent 70%)",
                   }}
                 />
+              </div>
+            )}
+            {placed.isRevealed && placed.isReversed && (
+              <div style={{
+                position: "absolute",
+                bottom: -16,
+                left: "50%",
+                transform: "translateX(-50%)",
+                fontFamily: "Cinzel, serif",
+                fontSize: 6.5,
+                letterSpacing: 1.5,
+                color: "rgba(220,100,80,0.5)",
+                whiteSpace: "nowrap",
+                pointerEvents: "none",
+              }}>
+                ↕ REV
               </div>
             )}
           </motion.div>
