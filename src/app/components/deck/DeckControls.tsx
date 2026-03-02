@@ -2,28 +2,28 @@
 
 import { motion } from "framer-motion";
 import { useTarotStore } from "../../store/useTarotStore";
-import { buttonVariants, tweenFast } from "../../animations/variants";
+import { buttonVariants } from "../../animations/variants";
 
 const btnBase: React.CSSProperties = {
   display: "block",
-  padding: "8px 18px",
-  background: "linear-gradient(135deg, rgba(139,92,246,0.2), rgba(100,60,200,0.15))",
-  border: "1px solid rgba(139,92,246,0.45)",
-  borderRadius: 6,
-  color: "#c8a84b",
+  padding: "7px 16px",
+  background: "rgba(255,255,255,0.03)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: 4,
+  color: "rgba(168,144,96,0.7)",
   fontFamily: "Cinzel, serif",
-  fontSize: 11,
-  letterSpacing: 2,
+  fontSize: 9,
+  letterSpacing: 2.5,
   cursor: "pointer",
   outline: "none",
   whiteSpace: "nowrap",
 };
 
 export function DeckControls() {
-  const { shuffleDeck, resetReading, isShuffling, deck } = useTarotStore();
+  const { shuffleDeck, resetReading, isShuffling } = useTarotStore();
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10, alignItems: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center" }}>
       <motion.button
         variants={buttonVariants}
         initial="idle"
@@ -33,11 +33,11 @@ export function DeckControls() {
         disabled={isShuffling}
         style={{
           ...btnBase,
-          opacity: isShuffling ? 0.5 : 1,
-          boxShadow: isShuffling ? "none" : "0 0 12px rgba(139,92,246,0.25)",
+          opacity: isShuffling ? 0.4 : 1,
+          borderColor: isShuffling ? "rgba(255,255,255,0.05)" : "rgba(99,102,241,0.2)",
         }}
       >
-        {isShuffling ? "✦ SHUFFLING ✦" : "✦ SHUFFLE ✦"}
+        {isShuffling ? "SHUFFLING" : "SHUFFLE"}
       </motion.button>
 
       <motion.button
@@ -48,11 +48,9 @@ export function DeckControls() {
         onClick={resetReading}
         style={{
           ...btnBase,
-          background: "rgba(139,92,246,0.07)",
-          borderColor: "rgba(139,92,246,0.25)",
-          color: "rgba(180,140,100,0.6)",
-          fontSize: 10,
-          letterSpacing: 1.5,
+          color: "rgba(168,144,96,0.35)",
+          fontSize: 8,
+          letterSpacing: 2,
         }}
       >
         RESET

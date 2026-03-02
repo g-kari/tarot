@@ -3,13 +3,13 @@
 import { motion } from "framer-motion";
 import { useTarotStore } from "../../store/useTarotStore";
 import { SPREADS } from "../../data/spreads";
-import { buttonVariants, spring } from "../../animations/variants";
+import { buttonVariants } from "../../animations/variants";
 
 export function SpreadSelector() {
   const { activeSpread, setActiveSpread } = useTarotStore();
 
   return (
-    <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+    <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
       {SPREADS.map((spread) => {
         const isActive = spread.id === activeSpread.id;
         return (
@@ -21,21 +21,18 @@ export function SpreadSelector() {
             whileTap="tap"
             onClick={() => setActiveSpread(spread)}
             style={{
-              padding: "6px 14px",
-              background: isActive
-                ? "linear-gradient(135deg, rgba(139,92,246,0.35), rgba(100,60,200,0.25))"
-                : "rgba(139,92,246,0.06)",
-              border: `1px solid ${isActive ? "rgba(139,92,246,0.7)" : "rgba(139,92,246,0.2)"}`,
-              borderRadius: 5,
-              color: isActive ? "#c8a84b" : "rgba(180,140,100,0.5)",
+              padding: "5px 12px",
+              background: isActive ? "rgba(99,102,241,0.12)" : "transparent",
+              border: `1px solid ${isActive ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.07)"}`,
+              borderRadius: 4,
+              color: isActive ? "rgba(168,144,96,0.8)" : "rgba(168,144,96,0.3)",
               fontFamily: "Cinzel, serif",
-              fontSize: 9,
-              letterSpacing: 1.5,
+              fontSize: 8,
+              letterSpacing: 2,
               cursor: "pointer",
               outline: "none",
               whiteSpace: "nowrap",
-              boxShadow: isActive ? "0 0 12px rgba(139,92,246,0.3)" : "none",
-              transition: "box-shadow 0.2s",
+              transition: "border-color 0.2s, color 0.2s",
             }}
           >
             {spread.name.toUpperCase()}

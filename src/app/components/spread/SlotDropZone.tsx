@@ -38,9 +38,9 @@ export function SlotDropZone({ slot }: Props) {
           <motion.div
             key={card.id}
             layoutId={`card-${card.id}`}
-            initial={{ scale: 0.7, opacity: 0 }}
+            initial={{ scale: 0.75, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
+            exit={{ scale: 0.85, opacity: 0 }}
             transition={spring}
           >
             <CardShell
@@ -57,12 +57,12 @@ export function SlotDropZone({ slot }: Props) {
                 pointerEvents: "none",
               }}>
                 <motion.div
-                  animate={{ scale: [1, 1.08, 1], opacity: [0.5, 0.9, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                  animate={{ scale: [1, 1.06, 1], opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 2.5, repeat: Infinity }}
                   style={{
-                    width: 32, height: 32,
+                    width: 28, height: 28,
                     borderRadius: "50%",
-                    background: "radial-gradient(circle, rgba(212,175,55,0.6) 0%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(168,144,96,0.35) 0%, transparent 70%)",
                   }}
                 />
               </div>
@@ -77,30 +77,33 @@ export function SlotDropZone({ slot }: Props) {
             style={{
               width: W, height: H,
               borderRadius: 8,
-              border: "1.5px dashed",
+              border: "1px dashed",
+              background: isOver ? "rgba(99,102,241,0.06)" : "rgba(255,255,255,0.015)",
+              backdropFilter: "blur(4px)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              gap: 4,
+              gap: 6,
             }}
           >
             <div style={{
-              color: "rgba(200,168,75,0.5)",
-              fontSize: 9,
+              color: "rgba(168,144,96,0.4)",
+              fontSize: 8,
               fontFamily: "Cinzel, serif",
-              letterSpacing: 1.5,
+              letterSpacing: 2,
               textAlign: "center",
-              padding: "0 8px",
+              padding: "0 10px",
             }}>
               {slot.label.toUpperCase()}
             </div>
             <div style={{
-              color: "rgba(139,92,246,0.35)",
+              color: "rgba(99,102,241,0.25)",
               fontSize: 8,
               fontFamily: "EB Garamond, serif",
               textAlign: "center",
-              padding: "0 10px",
+              padding: "0 12px",
+              lineHeight: 1.4,
             }}>
               {slot.description}
             </div>

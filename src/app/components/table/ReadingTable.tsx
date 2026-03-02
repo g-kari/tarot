@@ -23,27 +23,26 @@ export function ReadingTable() {
       <div style={{
         position: "relative",
         zIndex: 10,
-        padding: "14px 24px",
+        padding: "12px 20px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        borderBottom: "1px solid rgba(139,92,246,0.12)",
-        background: "rgba(0,0,0,0.25)",
-        backdropFilter: "blur(4px)",
+        borderBottom: "1px solid rgba(255,255,255,0.05)",
+        background: "rgba(5,6,9,0.6)",
+        backdropFilter: "blur(8px)",
         flexShrink: 0,
       }}>
         <motion.div
-          initial={{ opacity: 0, x: -12 }}
+          initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           style={{
-            fontFamily: "Cinzel Decorative, Cinzel, serif",
-            fontSize: 16,
-            letterSpacing: 4,
-            color: "#c8a84b",
-            textShadow: "0 0 20px rgba(200,168,75,0.4)",
+            fontFamily: "Cinzel, serif",
+            fontSize: 11,
+            letterSpacing: 5,
+            color: "rgba(168,144,96,0.6)",
           }}
         >
-          ✦ TAROT ✦
+          TAROT
         </motion.div>
 
         <SpreadSelector />
@@ -53,16 +52,16 @@ export function ReadingTable() {
       <div style={{ flex: 1, display: "flex", overflow: "hidden", position: "relative" }}>
         {/* Deck panel */}
         <div style={{
-          width: 200,
+          width: 180,
           flexShrink: 0,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 32,
+          gap: 28,
           padding: "24px 0",
-          borderRight: "1px solid rgba(139,92,246,0.1)",
-          background: "rgba(0,0,0,0.15)",
+          borderRight: "1px solid rgba(255,255,255,0.04)",
+          background: "rgba(0,0,0,0.2)",
           zIndex: 5,
         }}>
           <DeckPile />
@@ -74,17 +73,17 @@ export function ReadingTable() {
           {/* Spread name */}
           <motion.div
             key={activeSpread.id}
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             style={{
               position: "absolute",
-              top: 14,
+              top: 12,
               left: "50%",
               transform: "translateX(-50%)",
               fontFamily: "Cinzel, serif",
-              fontSize: 10,
-              letterSpacing: 3,
-              color: "rgba(139,92,246,0.5)",
+              fontSize: 9,
+              letterSpacing: 4,
+              color: "rgba(99,102,241,0.3)",
               zIndex: 5,
               pointerEvents: "none",
               whiteSpace: "nowrap",
@@ -97,7 +96,7 @@ export function ReadingTable() {
         </div>
       </div>
 
-      {/* Ambient particles */}
+      {/* Ambient particles - very subtle */}
       <Particles />
     </div>
   );
@@ -106,27 +105,27 @@ export function ReadingTable() {
 function Particles() {
   return (
     <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1 }}>
-      {Array.from({ length: 12 }, (_, i) => (
+      {Array.from({ length: 6 }, (_, i) => (
         <motion.div
           key={i}
           animate={{
-            y: [0, -12, 0],
-            opacity: [0.2, 0.5, 0.2],
+            y: [0, -8, 0],
+            opacity: [0.08, 0.18, 0.08],
           }}
           transition={{
-            duration: 3 + i * 0.5,
+            duration: 5 + i * 0.8,
             repeat: Infinity,
-            delay: i * 0.3,
+            delay: i * 0.7,
             ease: "easeInOut",
           }}
           style={{
             position: "absolute",
-            left: `${8 + i * 7.5}%`,
-            top: `${15 + (i % 4) * 20}%`,
-            width: i % 3 === 0 ? 3 : 2,
-            height: i % 3 === 0 ? 3 : 2,
+            left: `${12 + i * 15}%`,
+            top: `${20 + (i % 3) * 25}%`,
+            width: 2,
+            height: 2,
             borderRadius: "50%",
-            background: i % 2 === 0 ? "rgba(200,168,75,0.4)" : "rgba(139,92,246,0.4)",
+            background: i % 2 === 0 ? "rgba(168,144,96,0.5)" : "rgba(99,102,241,0.5)",
           }}
         />
       ))}

@@ -1,15 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap");
 
 :root {
-  --color-bg-deep: #060010;
-  --color-bg-mid: #16002e;
-  --color-bg-light: #2a0050;
-  --color-card-border-gold: #c8a84b;
-  --color-card-border-silver: #8899aa;
-  --color-accent-purple: #8b5cf6;
-  --color-accent-gold: #d4af37;
-  --color-text-light: #e8dcc8;
-  --color-text-dim: #8877aa;
+  --color-bg-deep: #050609;
+  --color-bg-mid: #0a0d18;
+  --color-bg-light: #131828;
+  --color-card-border-gold: #a89060;
+  --color-card-border-silver: #6b7280;
+  --color-accent-purple: #6366f1;
+  --color-accent-gold: #a89060;
+  --color-text-light: #ccc8c0;
+  --color-text-dim: #5c5870;
   --font-title: "Cinzel Decorative", "Cinzel", serif;
   --font-card: "Cinzel", serif;
   --font-body: "EB Garamond", serif;
