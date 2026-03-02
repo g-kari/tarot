@@ -43,6 +43,15 @@ src/app/
 - DnD: @dnd-kit/core with DragOverlay portal pattern
 - Animations: framer-motion v12 — `layoutId` for deck→slot travel
 
+## Deploy Architecture (vinext 0.0.18)
+- `pnpm deploy` = `vinext deploy` which uses `@cloudflare/vite-plugin` internally
+- `wrangler.toml` must set `main = "worker/index.ts"` (TypeScript source entry, NOT `dist/server/index.js`)
+- vinext deploy auto-generates `worker/index.ts` + `vite.config.ts` if missing, then runs a 5-step Vite build
+- Build output: `dist/server/` (worker bundle) + `dist/client/` (static assets)
+- `@cloudflare/vite-plugin` also generates `.wrangler/deploy/config.json` (redirect file) — this is gitignored
+- `@emotion/is-prop-valid` must be in `dependencies` (framer-motion optional peer dep, required at build time)
+- If CI deploy fails with "compatibility date" error: purge Cloudflare Pages build cache (stale `.wrangler/deploy/config.json`)
+
 ## Design System
 | Token | Value |
 |---|---|
