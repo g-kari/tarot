@@ -6,31 +6,22 @@ import { DeckPile } from "../deck/DeckPile";
 import { DeckControls } from "../deck/DeckControls";
 import { SpreadSelector } from "../spread/SpreadSelector";
 import { CardMeaningPanel } from "../card/CardMeaningPanel";
+import { PeerPanel } from "../common/PeerPanel";
 import { useTarotStore } from "../../store/useTarotStore";
 import { useIsMobile } from "../../hooks/useIsMobile";
-import { copyReadingLink } from "../../hooks/useReadingShare";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ReadingTable() {
-  const { activeSpread, placedCards, isViewOnly } = useTarotStore();
+  const { activeSpread, isViewOnly } = useTarotStore();
   const isMobile = useIsMobile();
   const [toast, setToast] = useState<string | null>(null);
   const [notifEnabled, setNotifEnabled] = useState(false);
+  const [peerOpen, setPeerOpen] = useState(false);
 
   const showToast = useCallback((msg: string) => {
     setToast(msg);
     setTimeout(() => setToast(null), 2200);
   }, []);
-
-  async function handleShare() {
-    if (placedCards.length === 0) { showToast("Place cards first"); return; }
-    try {
-      await copyReadingLink(activeSpread, placedCards);
-      showToast("Link copied!");
-    } catch {
-      showToast("Copy failed");
-    }
-  }
 
   async function handleNotification() {
     if (!("Notification" in window)) { showToast("Not supported"); return; }
@@ -52,7 +43,7 @@ export function ReadingTable() {
   const topBar = (
     <div style={{
       position: "relative",
-      zIndex: 10,
+      zIndex: 30,
       padding: isMobile ? "10px 14px" : "12px 20px",
       display: "flex",
       alignItems: "center",
@@ -78,23 +69,35 @@ export function ReadingTable() {
       <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
         <SpreadSelector />
 
-        <motion.button
-          whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
-          onClick={handleShare}
-          title="Share reading"
-          style={{
-            padding: "5px 9px",
-            background: "transparent",
-            border: "1px solid rgba(255,255,255,0.07)",
-            borderRadius: 4,
-            color: "rgba(168,144,96,0.5)",
-            fontSize: 11,
-            cursor: "pointer",
-            outline: "none",
-            opacity: 0.7,
-          }}
-        >↗</motion.button>
+        {/* Live Share (WebRTC) */}
+        <div style={{ position: "relative" }}>
+          <motion.button
+            whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
+            onClick={() => setPeerOpen((v) => !v)}
+            title="Live share via WebRTC"
+            style={{
+              padding: "5px 10px",
+              background: peerOpen ? "rgba(99,102,241,0.12)" : "transparent",
+              border: `1px solid ${peerOpen ? "rgba(99,102,241,0.35)" : "rgba(255,255,255,0.07)"}`,
+              borderRadius: 4,
+              color: peerOpen ? "rgba(99,102,241,0.8)" : "rgba(168,144,96,0.5)",
+              fontFamily: "Cinzel, serif",
+              fontSize: 8,
+              letterSpacing: 1.5,
+              cursor: "pointer",
+              outline: "none",
+              opacity: 0.85,
+            }}
+          >
+            LIVE
+          </motion.button>
 
+          <AnimatePresence>
+            {peerOpen && <PeerPanel onClose={() => setPeerOpen(false)} />}
+          </AnimatePresence>
+        </div>
+
+        {/* Notification bell */}
         <motion.button
           whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
           onClick={handleNotification}
@@ -151,14 +154,12 @@ export function ReadingTable() {
 
       {isMobile ? (
         <>
-          {/* Spread area — full width */}
           <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
             {spreadLabel}
             <SpreadLayout spread={activeSpread} />
             <CardMeaningPanel />
           </div>
 
-          {/* Bottom deck bar */}
           <div style={{
             flexShrink: 0,
             display: "flex",
@@ -177,7 +178,6 @@ export function ReadingTable() {
         </>
       ) : (
         <div style={{ flex: 1, display: "flex", overflow: "hidden", position: "relative" }}>
-          {/* Deck panel */}
           <div style={{
             width: 180,
             flexShrink: 0,
@@ -195,7 +195,6 @@ export function ReadingTable() {
             <DeckControls />
           </div>
 
-          {/* Spread area */}
           <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
             {spreadLabel}
             <SpreadLayout spread={activeSpread} />
@@ -204,7 +203,7 @@ export function ReadingTable() {
         </div>
       )}
 
-      {/* Toast notification */}
+      {/* Toast */}
       <AnimatePresence>
         {toast && (
           <motion.div
@@ -236,7 +235,6 @@ export function ReadingTable() {
         )}
       </AnimatePresence>
 
-      {/* Ambient particles */}
       <Particles />
     </div>
   );

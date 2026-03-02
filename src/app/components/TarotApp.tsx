@@ -8,33 +8,15 @@ import { ReadingTable } from "./table/ReadingTable";
 import { CardShell } from "./card/CardShell";
 import { useTarotStore } from "../store/useTarotStore";
 import { spring } from "../animations/variants";
-import { getHashReading } from "../hooks/useReadingShare";
-import { SPREADS } from "../data/spreads";
-import type { PlacedCard } from "../store/useTarotStore";
 
 export default function TarotApp() {
-  const { setDragging, getDraggingCard, dealToSlot, returnCardToDeck, draggingCardId, isViewOnly, loadSharedReading } = useTarotStore();
+  const { setDragging, getDraggingCard, dealToSlot, returnCardToDeck, draggingCardId, isViewOnly } = useTarotStore();
 
   // Register service worker
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js").catch(() => {});
     }
-  }, []);
-
-  // Restore reading from URL hash (P2P share)
-  useEffect(() => {
-    const shared = getHashReading();
-    if (!shared) return;
-    const spread = SPREADS.find((s) => s.id === shared.s);
-    if (!spread) return;
-    const cards: PlacedCard[] = shared.c.map((c) => ({
-      cardId: c.i,
-      slotId: c.p,
-      isReversed: c.r,
-      isRevealed: c.v,
-    }));
-    loadSharedReading(spread, cards);
   }, []);
 
   const sensors = useSensors(
