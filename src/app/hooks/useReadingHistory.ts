@@ -21,18 +21,30 @@ function notify() {
   listeners.forEach((l) => l());
 }
 
+// Cached snapshot for useSyncExternalStore referential equality
+let cachedRaw: string | null = null;
+let cachedRecords: ReadingRecord[] = [];
+const EMPTY: ReadingRecord[] = [];
+
 function getRecords(): ReadingRecord[] {
-  if (typeof window === "undefined") return [];
+  if (typeof window === "undefined") return EMPTY;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as ReadingRecord[]) : [];
+    if (raw !== cachedRaw) {
+      cachedRaw = raw;
+      cachedRecords = raw ? (JSON.parse(raw) as ReadingRecord[]) : [];
+    }
+    return cachedRecords;
   } catch {
-    return [];
+    return EMPTY;
   }
 }
 
 function setRecords(records: ReadingRecord[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  const json = JSON.stringify(records);
+  cachedRaw = json;
+  cachedRecords = records;
+  localStorage.setItem(STORAGE_KEY, json);
   notify();
 }
 
@@ -41,7 +53,7 @@ function getSnapshot(): ReadingRecord[] {
 }
 
 function getServerSnapshot(): ReadingRecord[] {
-  return [];
+  return EMPTY;
 }
 
 function subscribe(listener: () => void): () => void {
