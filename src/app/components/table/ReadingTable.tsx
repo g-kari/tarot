@@ -141,18 +141,16 @@ export function ReadingTable() {
         </motion.button>
 
         {/* AI Reading */}
-        {hasRevealedCards && !isViewOnly && (
+        {!isViewOnly && (
           <motion.button
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
             whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
             onClick={() => setAiOpen(true)}
             title="AIリーディング"
             style={{
               ...btnStyle(false),
-              color: "rgba(99,102,241,0.85)",
-              border: "1px solid rgba(99,102,241,0.35)",
-              background: "rgba(99,102,241,0.08)",
+              color: hasRevealedCards ? "rgba(99,102,241,0.85)" : "rgba(99,102,241,0.4)",
+              border: `1px solid ${hasRevealedCards ? "rgba(99,102,241,0.35)" : "rgba(99,102,241,0.15)"}`,
+              background: hasRevealedCards ? "rgba(99,102,241,0.08)" : "transparent",
             }}
           >
             AI占い

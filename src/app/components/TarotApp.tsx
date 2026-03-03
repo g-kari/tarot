@@ -86,12 +86,7 @@ export default function TarotApp() {
         >
           <ReadingTable />
 
-          <DragOverlay
-            dropAnimation={{
-              duration: 220,
-              easing: "cubic-bezier(0.18, 0.67, 0.6, 1.22)",
-            }}
-          >
+          <DragOverlay dropAnimation={null}>
             <AnimatePresence>
               {draggingCard && !isViewOnly && (
                 <motion.div

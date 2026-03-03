@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useAIReading, READING_THEMES, type ReadingTheme } from "../../hooks/useAIReading";
+import { useTarotStore } from "../../store/useTarotStore";
 
 interface Props {
   open: boolean;
@@ -11,6 +12,7 @@ interface Props {
 
 export function AIReadingPanel({ open, onClose, onSaveReading }: Props) {
   const { loading, reading, error, theme, requestReading, reset } = useAIReading();
+  const hasRevealedCards = useTarotStore((s) => s.placedCards.some((p) => p.isRevealed));
 
   function handleClose() {
     reset();
@@ -86,6 +88,18 @@ export function AIReadingPanel({ open, onClose, onSaveReading }: Props) {
             {/* Theme selector */}
             {showThemeSelector && (
               <div>
+                {!hasRevealedCards && (
+                  <p style={{
+                    fontFamily: "EB Garamond, serif",
+                    fontSize: 14,
+                    color: "rgba(220,180,80,0.7)",
+                    marginBottom: 16,
+                    textAlign: "center",
+                    padding: "12px 0",
+                  }}>
+                    カードを配置してめくってから、テーマを選んでください
+                  </p>
+                )}
                 <p style={{
                   fontFamily: "EB Garamond, serif",
                   fontSize: 14,
