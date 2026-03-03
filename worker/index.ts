@@ -26,6 +26,33 @@ interface Env {
   };
 }
 
+// --- Rate limiter (per-IP, in-memory) ---
+const RATE_LIMIT_WINDOW = 60_000; // 1 minute
+const RATE_LIMIT_MAX = 5; // max requests per window
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+    return false;
+  }
+  entry.count++;
+  return entry.count > RATE_LIMIT_MAX;
+}
+
+// Periodic cleanup to avoid unbounded growth
+let lastCleanup = Date.now();
+function cleanupRateLimit() {
+  const now = Date.now();
+  if (now - lastCleanup < RATE_LIMIT_WINDOW) return;
+  lastCleanup = now;
+  for (const [ip, entry] of rateLimitMap) {
+    if (now > entry.resetAt) rateLimitMap.delete(ip);
+  }
+}
+
 const READING_SYSTEM_PROMPT = `あなたはプロのタロットリーダーです。引かれたカードの組み合わせから総合的なリーディングを行います。
 各カードの位置（スプレッドの意味）、正位置・逆位置、カード同士の関係性を考慮して、温かく思慮深い解釈を提供してください。
 指定されたテーマに沿った具体的なアドバイスを含めてください。
@@ -37,6 +64,14 @@ export default {
 
     // AI tarot reading endpoint
     if (url.pathname === "/api/reading" && request.method === "POST") {
+      cleanupRateLimit();
+      const clientIp = request.headers.get("CF-Connecting-IP") ?? "unknown";
+      if (isRateLimited(clientIp)) {
+        return Response.json(
+          { error: "リクエストが多すぎます。しばらくしてからお試しください。" },
+          { status: 429, headers: { "Retry-After": "60" } }
+        );
+      }
       if (!env.AI) {
         return Response.json({ error: "AI binding not configured" }, { status: 503 });
       }
