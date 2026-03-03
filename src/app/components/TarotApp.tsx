@@ -7,6 +7,7 @@ import { TableclothBackground } from "./background/TableclothBackground";
 import { ReadingTable } from "./table/ReadingTable";
 import { CardShell } from "./card/CardShell";
 import { useTarotStore } from "../store/useTarotStore";
+import { useIsMobile } from "../hooks/useIsMobile";
 import { spring } from "../animations/variants";
 
 export default function TarotApp() {
@@ -68,6 +69,8 @@ export default function TarotApp() {
     dealToSlot(cardId, overId);
   }
 
+  const isMobile = useIsMobile();
+  const cardScale = isMobile ? 0.72 : 1;
   const draggingCard = getDraggingCard();
   const draggingPlaced = placedCards.find((p) => p.cardId === draggingCardId);
 
@@ -93,9 +96,9 @@ export default function TarotApp() {
               {draggingCard && !isViewOnly && (
                 <motion.div
                   initial={{ scale: 1 }}
-                  animate={{ scale: 1.1 }}
+                  animate={{ scale: 1.05 }}
                   style={{
-                    filter: "drop-shadow(0 14px 28px rgba(99,102,241,0.5))",
+                    filter: "drop-shadow(0 8px 20px rgba(99,102,241,0.4))",
                     cursor: "grabbing",
                   }}
                   transition={spring}
@@ -104,6 +107,7 @@ export default function TarotApp() {
                     card={draggingCard}
                     isFaceUp={draggingPlaced?.isRevealed ?? false}
                     isReversed={draggingPlaced?.isReversed ?? false}
+                    scale={cardScale}
                   />
                 </motion.div>
               )}
