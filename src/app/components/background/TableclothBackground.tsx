@@ -18,9 +18,9 @@ export const TableclothBackground = memo(function TableclothBackground() {
       <defs>
         {/* Base gradient - dark blue-black */}
         <radialGradient id="bgGrad" cx="50%" cy="45%" r="70%">
-          <stop offset="0%"   stopColor="#0d1020" />
-          <stop offset="55%"  stopColor="#07090f" />
-          <stop offset="100%" stopColor="#030407" />
+          <stop offset="0%"   stopColor="#141830" />
+          <stop offset="55%"  stopColor="#0b0e18" />
+          <stop offset="100%" stopColor="#06080e" />
         </radialGradient>
 
         {/* Subtle cloth noise */}
@@ -47,7 +47,7 @@ export const TableclothBackground = memo(function TableclothBackground() {
         {/* Edge vignette */}
         <radialGradient id="vignette" cx="50%" cy="50%" r="68%">
           <stop offset="0%"   stopColor="transparent" />
-          <stop offset="100%" stopColor="rgba(0,0,2,0.82)" />
+          <stop offset="100%" stopColor="rgba(0,0,2,0.65)" />
         </radialGradient>
       </defs>
 

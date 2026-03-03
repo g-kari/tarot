@@ -69,17 +69,16 @@ export function ReadingTable() {
   }
 
   const btnStyle = (active: boolean): React.CSSProperties => ({
-    padding: "5px 10px",
-    background: active ? "rgba(99,102,241,0.12)" : "transparent",
-    border: `1px solid ${active ? "rgba(99,102,241,0.35)" : "rgba(255,255,255,0.07)"}`,
-    borderRadius: 4,
-    color: active ? "rgba(99,102,241,0.8)" : "rgba(168,144,96,0.5)",
+    padding: "6px 12px",
+    background: active ? "rgba(99,102,241,0.15)" : "transparent",
+    border: `1px solid ${active ? "rgba(99,102,241,0.45)" : "rgba(255,255,255,0.12)"}`,
+    borderRadius: 5,
+    color: active ? "rgba(99,102,241,0.9)" : "rgba(168,144,96,0.75)",
     fontFamily: "Cinzel, serif",
-    fontSize: 8,
+    fontSize: 11,
     letterSpacing: 1.5,
     cursor: "pointer",
     outline: "none",
-    opacity: 0.85,
   });
 
   const topBar = (
@@ -90,8 +89,8 @@ export function ReadingTable() {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      borderBottom: "1px solid rgba(255,255,255,0.05)",
-      background: "rgba(5,6,9,0.6)",
+      borderBottom: "1px solid rgba(255,255,255,0.08)",
+      background: "rgba(8,10,16,0.7)",
       backdropFilter: "blur(8px)",
       flexShrink: 0,
     }}>
@@ -100,9 +99,9 @@ export function ReadingTable() {
         animate={{ opacity: 1, x: 0 }}
         style={{
           fontFamily: "Cinzel, serif",
-          fontSize: isMobile ? 9 : 11,
+          fontSize: isMobile ? 12 : 14,
           letterSpacing: 5,
-          color: isViewOnly ? "rgba(99,102,241,0.5)" : "rgba(168,144,96,0.6)",
+          color: isViewOnly ? "rgba(99,102,241,0.7)" : "rgba(168,144,96,0.8)",
         }}
       >
         {isViewOnly ? "共有中" : "TAROT"}
@@ -151,9 +150,9 @@ export function ReadingTable() {
             title="AIリーディング"
             style={{
               ...btnStyle(false),
-              color: "rgba(99,102,241,0.7)",
-              border: "1px solid rgba(99,102,241,0.25)",
-              background: "rgba(99,102,241,0.06)",
+              color: "rgba(99,102,241,0.85)",
+              border: "1px solid rgba(99,102,241,0.35)",
+              background: "rgba(99,102,241,0.08)",
             }}
           >
             AI占い
@@ -184,15 +183,14 @@ export function ReadingTable() {
           onClick={handleNotification}
           title={notifEnabled ? "通知オフ" : "通知オン"}
           style={{
-            padding: "5px 8px",
+            padding: "6px 10px",
             background: "transparent",
-            border: `1px solid ${notifEnabled ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.07)"}`,
-            borderRadius: 4,
-            color: notifEnabled ? "rgba(99,102,241,0.7)" : "rgba(168,144,96,0.35)",
-            fontSize: 11,
+            border: `1px solid ${notifEnabled ? "rgba(99,102,241,0.4)" : "rgba(255,255,255,0.12)"}`,
+            borderRadius: 5,
+            color: notifEnabled ? "rgba(99,102,241,0.85)" : "rgba(168,144,96,0.5)",
+            fontSize: 14,
             cursor: "pointer",
             outline: "none",
-            opacity: 0.7,
           }}
         >{notifEnabled ? "🔔" : "🔕"}</motion.button>
       </div>
@@ -210,9 +208,9 @@ export function ReadingTable() {
         left: "50%",
         transform: "translateX(-50%)",
         fontFamily: "Cinzel, serif",
-        fontSize: 8,
+        fontSize: 10,
         letterSpacing: 4,
-        color: "rgba(99,102,241,0.3)",
+        color: "rgba(99,102,241,0.45)",
         zIndex: 5,
         pointerEvents: "none",
         whiteSpace: "nowrap",
@@ -239,8 +237,8 @@ export function ReadingTable() {
           display: "flex",
           gap: 4,
           padding: "6px 14px",
-          borderBottom: "1px solid rgba(255,255,255,0.03)",
-          background: "rgba(5,6,9,0.4)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          background: "rgba(8,10,16,0.5)",
           overflowX: "auto",
           flexShrink: 0,
           zIndex: 20,
@@ -319,9 +317,9 @@ export function ReadingTable() {
               borderRadius: 4,
               padding: "6px 14px",
               fontFamily: "Cinzel, serif",
-              fontSize: 9,
+              fontSize: 12,
               letterSpacing: 2,
-              color: "rgba(168,144,96,0.8)",
+              color: "rgba(168,144,96,0.9)",
               zIndex: 50,
               pointerEvents: "none",
               whiteSpace: "nowrap",

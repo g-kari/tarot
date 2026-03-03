@@ -31,9 +31,9 @@ export function CardMeaningPanel() {
             left: 0,
             right: 0,
             zIndex: 20,
-            background: "rgba(5,6,9,0.88)",
+            background: "rgba(8,10,16,0.9)",
             backdropFilter: "blur(16px)",
-            borderTop: "1px solid rgba(255,255,255,0.055)",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
             padding: "14px 20px 16px",
           }}
         >
@@ -42,9 +42,9 @@ export function CardMeaningPanel() {
             {(slot || activeSpread.slots.length === 0) && (
               <span style={{
                 fontFamily: "Cinzel, serif",
-                fontSize: 7,
+                fontSize: 10,
                 letterSpacing: 3,
-                color: slot ? "rgba(99,102,241,0.45)" : "rgba(168,144,96,0.3)",
+                color: slot ? "rgba(99,102,241,0.65)" : "rgba(168,144,96,0.5)",
                 textTransform: "uppercase",
                 flexShrink: 0,
               }}>
@@ -53,19 +53,19 @@ export function CardMeaningPanel() {
             )}
             <span style={{
               fontFamily: "Cinzel, serif",
-              fontSize: 12,
+              fontSize: 15,
               letterSpacing: 2,
-              color: "rgba(204,200,192,0.88)",
+              color: "rgba(220,216,208,0.92)",
             }}>
               {card.name}
             </span>
             <span style={{
               fontFamily: "Cinzel, serif",
-              fontSize: 7,
+              fontSize: 10,
               letterSpacing: 1.5,
-              color: activePlaced.isReversed ? "rgba(220,100,80,0.65)" : "rgba(168,144,96,0.55)",
+              color: activePlaced.isReversed ? "rgba(220,100,80,0.8)" : "rgba(168,144,96,0.7)",
               border: "1px solid",
-              borderColor: activePlaced.isReversed ? "rgba(220,100,80,0.25)" : "rgba(168,144,96,0.2)",
+              borderColor: activePlaced.isReversed ? "rgba(220,100,80,0.35)" : "rgba(168,144,96,0.3)",
               borderRadius: 3,
               padding: "1px 5px",
               flexShrink: 0,
@@ -77,9 +77,9 @@ export function CardMeaningPanel() {
           {/* Meaning */}
           <p style={{
             fontFamily: "EB Garamond, serif",
-            fontSize: 14,
+            fontSize: 15,
             lineHeight: 1.55,
-            color: "rgba(196,192,184,0.72)",
+            color: "rgba(210,206,198,0.85)",
             marginBottom: revealedPlaced.length > 1 ? 10 : 0,
           }}>
             {activePlaced.isReversed ? card.reversedMeaning : card.uprightMeaning}
@@ -90,10 +90,10 @@ export function CardMeaningPanel() {
             {card.keywords.map((kw) => (
               <span key={kw} style={{
                 fontFamily: "Cinzel, serif",
-                fontSize: 6.5,
+                fontSize: 10,
                 letterSpacing: 1.5,
-                color: "rgba(99,102,241,0.38)",
-                border: "1px solid rgba(99,102,241,0.12)",
+                color: "rgba(99,102,241,0.55)",
+                border: "1px solid rgba(99,102,241,0.2)",
                 borderRadius: 2,
                 padding: "2px 6px",
               }}>

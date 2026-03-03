@@ -21,13 +21,13 @@ export function SpreadSelector() {
             whileTap="tap"
             onClick={() => setActiveSpread(spread)}
             style={{
-              padding: "5px 12px",
-              background: isActive ? "rgba(99,102,241,0.12)" : "transparent",
-              border: `1px solid ${isActive ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.07)"}`,
-              borderRadius: 4,
-              color: isActive ? "rgba(168,144,96,0.8)" : "rgba(168,144,96,0.3)",
+              padding: "6px 14px",
+              background: isActive ? "rgba(99,102,241,0.15)" : "transparent",
+              border: `1px solid ${isActive ? "rgba(99,102,241,0.4)" : "rgba(255,255,255,0.12)"}`,
+              borderRadius: 5,
+              color: isActive ? "rgba(168,144,96,0.9)" : "rgba(168,144,96,0.5)",
               fontFamily: "Cinzel, serif",
-              fontSize: 8,
+              fontSize: 11,
               letterSpacing: 2,
               cursor: "pointer",
               outline: "none",

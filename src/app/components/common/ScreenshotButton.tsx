@@ -53,17 +53,16 @@ export function ScreenshotButton({ targetRef }: Props) {
       disabled={saving}
       title="スクリーンショット"
       style={{
-        padding: "5px 10px",
+        padding: "6px 12px",
         background: "transparent",
-        border: "1px solid rgba(255,255,255,0.07)",
-        borderRadius: 4,
-        color: saving ? "rgba(99,102,241,0.6)" : "rgba(168,144,96,0.45)",
+        border: "1px solid rgba(255,255,255,0.12)",
+        borderRadius: 5,
+        color: saving ? "rgba(99,102,241,0.75)" : "rgba(168,144,96,0.65)",
         fontFamily: "Cinzel, serif",
-        fontSize: 8,
+        fontSize: 14,
         letterSpacing: 1.5,
         cursor: saving ? "wait" : "pointer",
         outline: "none",
-        opacity: 0.85,
       }}
     >
       {saving ? "保存中..." : "📷"}
