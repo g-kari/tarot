@@ -3,7 +3,23 @@ import "./globals.css";
 
 export const metadata = {
   title: "Tarot",
-  description: "Interactive tarot card reading",
+  description: "インタラクティブなタロットカードリーディング",
+  metadataBase: new URL("https://tarot.0g0.workers.dev"),
+  openGraph: {
+    title: "Tarot",
+    description: "インタラクティブなタロットカードリーディング",
+    url: "https://tarot.0g0.workers.dev",
+    siteName: "Tarot",
+    images: [{ url: "/og.svg", width: 1200, height: 630, type: "image/svg+xml" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tarot",
+    description: "インタラクティブなタロットカードリーディング",
+    images: ["/og.svg"],
+  },
 };
 
 export const viewport = {
