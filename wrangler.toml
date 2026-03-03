@@ -11,5 +11,13 @@ directory = "dist/client"
 [ai]
 binding = "AI"
 
+[[ratelimits]]
+name = "AI_RATE_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 5
+  period = 60
+
 [observability]
 enabled = true

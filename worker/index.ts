@@ -24,33 +24,9 @@ interface Env {
   AI?: {
     run(model: string, input: Record<string, unknown>): Promise<{ response?: string }>;
   };
-}
-
-// --- Rate limiter (per-IP, in-memory) ---
-const RATE_LIMIT_WINDOW = 60_000; // 1 minute
-const RATE_LIMIT_MAX = 5; // max requests per window
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-    return false;
-  }
-  entry.count++;
-  return entry.count > RATE_LIMIT_MAX;
-}
-
-// Periodic cleanup to avoid unbounded growth
-let lastCleanup = Date.now();
-function cleanupRateLimit() {
-  const now = Date.now();
-  if (now - lastCleanup < RATE_LIMIT_WINDOW) return;
-  lastCleanup = now;
-  for (const [ip, entry] of rateLimitMap) {
-    if (now > entry.resetAt) rateLimitMap.delete(ip);
-  }
+  AI_RATE_LIMITER?: {
+    limit(options: { key: string }): Promise<{ success: boolean }>;
+  };
 }
 
 const READING_SYSTEM_PROMPT = `あなたはプロのタロットリーダーです。引かれたカードの組み合わせから総合的なリーディングを行います。
@@ -64,13 +40,15 @@ export default {
 
     // AI tarot reading endpoint
     if (url.pathname === "/api/reading" && request.method === "POST") {
-      cleanupRateLimit();
       const clientIp = request.headers.get("CF-Connecting-IP") ?? "unknown";
-      if (isRateLimited(clientIp)) {
-        return Response.json(
-          { error: "リクエストが多すぎます。しばらくしてからお試しください。" },
-          { status: 429, headers: { "Retry-After": "60" } }
-        );
+      if (env.AI_RATE_LIMITER) {
+        const { success } = await env.AI_RATE_LIMITER.limit({ key: clientIp });
+        if (!success) {
+          return Response.json(
+            { error: "リクエストが多すぎます。しばらくしてからお試しください。" },
+            { status: 429, headers: { "Retry-After": "60" } }
+          );
+        }
       }
       if (!env.AI) {
         return Response.json({ error: "AI binding not configured" }, { status: 503 });
