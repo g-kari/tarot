@@ -16,6 +16,29 @@ export const READING_THEMES = [
 
 export type ReadingTheme = (typeof READING_THEMES)[number]["id"];
 
+const DAILY_KEY = "tarot-ai-last-reading";
+
+function getTodayStr(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+export function hasUsedTodayReading(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return localStorage.getItem(DAILY_KEY) === getTodayStr();
+  } catch {
+    return false;
+  }
+}
+
+function markTodayUsed() {
+  try {
+    localStorage.setItem(DAILY_KEY, getTodayStr());
+  } catch {
+    // ignore
+  }
+}
+
 interface AIReadingState {
   loading: boolean;
   reading: string | null;
@@ -37,6 +60,11 @@ export function useAIReading() {
 
     if (revealedCards.length === 0) {
       setState((s) => ({ ...s, error: "カードをめくってからリーディングしてください" }));
+      return;
+    }
+
+    if (hasUsedTodayReading()) {
+      setState((s) => ({ ...s, error: "本日のAIリーディングは使用済みです。明日またお試しください。" }));
       return;
     }
 
@@ -70,6 +98,7 @@ export function useAIReading() {
       }
 
       const data = await res.json() as { reading: string };
+      markTodayUsed();
       setState({ loading: false, reading: data.reading, error: null, theme });
     } catch (err) {
       setState({
@@ -85,5 +114,5 @@ export function useAIReading() {
     setState({ loading: false, reading: null, error: null, theme: null });
   }, []);
 
-  return { ...state, requestReading, reset };
+  return { ...state, requestReading, reset, usedToday: hasUsedTodayReading() };
 }

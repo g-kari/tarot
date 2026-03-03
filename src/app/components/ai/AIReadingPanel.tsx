@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function AIReadingPanel({ open, onClose, onSaveReading }: Props) {
-  const { loading, reading, error, theme, requestReading, reset } = useAIReading();
+  const { loading, reading, error, theme, requestReading, reset, usedToday } = useAIReading();
   const hasRevealedCards = useTarotStore((s) => s.placedCards.some((p) => p.isRevealed));
 
   function handleClose() {
@@ -88,7 +88,18 @@ export function AIReadingPanel({ open, onClose, onSaveReading }: Props) {
             {/* Theme selector */}
             {showThemeSelector && (
               <div>
-                {!hasRevealedCards && (
+                {usedToday ? (
+                  <p style={{
+                    fontFamily: "EB Garamond, serif",
+                    fontSize: 14,
+                    color: "rgba(220,180,80,0.7)",
+                    marginBottom: 16,
+                    textAlign: "center",
+                    padding: "12px 0",
+                  }}>
+                    本日のAIリーディングは使用済みです。明日またお試しください。
+                  </p>
+                ) : !hasRevealedCards ? (
                   <p style={{
                     fontFamily: "EB Garamond, serif",
                     fontSize: 14,
@@ -99,44 +110,51 @@ export function AIReadingPanel({ open, onClose, onSaveReading }: Props) {
                   }}>
                     カードを配置してめくってから、テーマを選んでください
                   </p>
+                ) : null}
+                {!usedToday && (
+                  <p style={{
+                    fontFamily: "EB Garamond, serif",
+                    fontSize: 14,
+                    color: "rgba(196,192,184,0.65)",
+                    marginBottom: 16,
+                  }}>
+                    占いたいテーマを選んでください
+                    <span style={{ fontSize: 11, color: "rgba(196,192,184,0.4)", marginLeft: 8 }}>
+                      (1日1回)
+                    </span>
+                  </p>
                 )}
-                <p style={{
-                  fontFamily: "EB Garamond, serif",
-                  fontSize: 14,
-                  color: "rgba(196,192,184,0.65)",
-                  marginBottom: 16,
-                }}>
-                  占いたいテーマを選んでください
-                </p>
-                <div style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(2, 1fr)",
-                  gap: 8,
-                }}>
-                  {READING_THEMES.map((t) => (
-                    <motion.button
-                      key={t.id}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => handleThemeSelect(t.id)}
-                      style={{
-                        padding: "12px 10px",
-                        background: "rgba(99,102,241,0.06)",
-                        border: "1px solid rgba(99,102,241,0.15)",
-                        borderRadius: 6,
-                        color: "rgba(168,144,96,0.75)",
-                        fontFamily: "Cinzel, serif",
-                        fontSize: 11,
-                        letterSpacing: 2,
-                        cursor: "pointer",
-                        outline: "none",
-                        transition: "border-color 0.2s",
-                      }}
-                    >
-                      {t.label}
-                    </motion.button>
-                  ))}
-                </div>
+                {!usedToday && (
+                  <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, 1fr)",
+                    gap: 8,
+                  }}>
+                    {READING_THEMES.map((t) => (
+                      <motion.button
+                        key={t.id}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        onClick={() => handleThemeSelect(t.id)}
+                        style={{
+                          padding: "12px 10px",
+                          background: "rgba(99,102,241,0.06)",
+                          border: "1px solid rgba(99,102,241,0.15)",
+                          borderRadius: 6,
+                          color: "rgba(168,144,96,0.75)",
+                          fontFamily: "Cinzel, serif",
+                          fontSize: 11,
+                          letterSpacing: 2,
+                          cursor: "pointer",
+                          outline: "none",
+                          transition: "border-color 0.2s",
+                        }}
+                      >
+                        {t.label}
+                      </motion.button>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 

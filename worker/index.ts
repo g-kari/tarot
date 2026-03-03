@@ -45,8 +45,8 @@ export default {
         const { success } = await env.AI_RATE_LIMITER.limit({ key: clientIp });
         if (!success) {
           return Response.json(
-            { error: "本日のAIリーディングは使用済みです。明日またお試しください。" },
-            { status: 429, headers: { "Retry-After": "86400" } }
+            { error: "リクエストが多すぎます。しばらくしてからお試しください。" },
+            { status: 429, headers: { "Retry-After": "60" } }
           );
         }
       }
