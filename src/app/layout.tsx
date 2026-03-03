@@ -20,6 +20,10 @@ export const metadata = {
     description: "インタラクティブなタロットカードリーディング",
     images: ["/og.svg"],
   },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export const viewport = {
@@ -34,6 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja">
       <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
