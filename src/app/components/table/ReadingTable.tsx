@@ -1,22 +1,37 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { SpreadLayout } from "../spread/SpreadLayout";
 import { DeckPile } from "../deck/DeckPile";
 import { DeckControls } from "../deck/DeckControls";
 import { SpreadSelector } from "../spread/SpreadSelector";
 import { CardMeaningPanel } from "../card/CardMeaningPanel";
 import { PeerPanel } from "../common/PeerPanel";
+import { ScreenshotButton } from "../common/ScreenshotButton";
+import { AIReadingPanel } from "../ai/AIReadingPanel";
+import { ReadingHistory } from "../history/ReadingHistory";
+import { DailyCardModal } from "../daily/DailyCardModal";
+import { CardGallery } from "../gallery/CardGallery";
 import { useTarotStore } from "../../store/useTarotStore";
 import { useIsMobile } from "../../hooks/useIsMobile";
+import { useReadingHistory } from "../../hooks/useReadingHistory";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ReadingTable() {
-  const { activeSpread, isViewOnly } = useTarotStore();
+  const { activeSpread, placedCards, isViewOnly } = useTarotStore();
   const isMobile = useIsMobile();
+  const { saveReading } = useReadingHistory();
+  const spreadAreaRef = useRef<HTMLDivElement>(null);
+
   const [toast, setToast] = useState<string | null>(null);
   const [notifEnabled, setNotifEnabled] = useState(false);
   const [peerOpen, setPeerOpen] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [dailyOpen, setDailyOpen] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+
+  const hasRevealedCards = placedCards.some((p) => p.isRevealed);
 
   const showToast = useCallback((msg: string) => {
     setToast(msg);
@@ -39,6 +54,33 @@ export function ReadingTable() {
       showToast("通知オフ");
     }
   }
+
+  function handleSaveReading(theme: string, aiReading: string) {
+    saveReading({
+      spreadId: activeSpread.id,
+      spreadName: activeSpread.name,
+      theme,
+      cards: placedCards
+        .filter((p) => p.isRevealed)
+        .map((p) => ({ cardId: p.cardId, slotId: p.slotId, isReversed: p.isReversed })),
+      aiReading,
+    });
+    showToast("履歴に保存しました");
+  }
+
+  const btnStyle = (active: boolean): React.CSSProperties => ({
+    padding: "5px 10px",
+    background: active ? "rgba(99,102,241,0.12)" : "transparent",
+    border: `1px solid ${active ? "rgba(99,102,241,0.35)" : "rgba(255,255,255,0.07)"}`,
+    borderRadius: 4,
+    color: active ? "rgba(99,102,241,0.8)" : "rgba(168,144,96,0.5)",
+    fontFamily: "Cinzel, serif",
+    fontSize: 8,
+    letterSpacing: 1.5,
+    cursor: "pointer",
+    outline: "none",
+    opacity: 0.85,
+  });
 
   const topBar = (
     <div style={{
@@ -66,32 +108,71 @@ export function ReadingTable() {
         {isViewOnly ? "共有中" : "TAROT"}
       </motion.div>
 
-      <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-        <SpreadSelector />
+      <div style={{ display: "flex", gap: isMobile ? 4 : 6, alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
+        {!isMobile && <SpreadSelector />}
 
-        {/* Live Share (WebRTC) */}
+        {/* Daily card */}
+        <motion.button
+          whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
+          onClick={() => setDailyOpen(true)}
+          title="今日のカード"
+          style={btnStyle(false)}
+        >
+          今日
+        </motion.button>
+
+        {/* Gallery */}
+        <motion.button
+          whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
+          onClick={() => setGalleryOpen(true)}
+          title="カード図鑑"
+          style={btnStyle(false)}
+        >
+          図鑑
+        </motion.button>
+
+        {/* History */}
+        <motion.button
+          whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
+          onClick={() => setHistoryOpen(true)}
+          title="リーディング履歴"
+          style={btnStyle(false)}
+        >
+          履歴
+        </motion.button>
+
+        {/* AI Reading */}
+        {hasRevealedCards && !isViewOnly && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
+            onClick={() => setAiOpen(true)}
+            title="AIリーディング"
+            style={{
+              ...btnStyle(false),
+              color: "rgba(99,102,241,0.7)",
+              border: "1px solid rgba(99,102,241,0.25)",
+              background: "rgba(99,102,241,0.06)",
+            }}
+          >
+            AI占い
+          </motion.button>
+        )}
+
+        {/* Screenshot */}
+        <ScreenshotButton targetRef={spreadAreaRef} />
+
+        {/* Live Share */}
         <div style={{ position: "relative" }}>
           <motion.button
             whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
             onClick={() => setPeerOpen((v) => !v)}
             title="Live share via WebRTC"
-            style={{
-              padding: "5px 10px",
-              background: peerOpen ? "rgba(99,102,241,0.12)" : "transparent",
-              border: `1px solid ${peerOpen ? "rgba(99,102,241,0.35)" : "rgba(255,255,255,0.07)"}`,
-              borderRadius: 4,
-              color: peerOpen ? "rgba(99,102,241,0.8)" : "rgba(168,144,96,0.5)",
-              fontFamily: "Cinzel, serif",
-              fontSize: 8,
-              letterSpacing: 1.5,
-              cursor: "pointer",
-              outline: "none",
-              opacity: 0.85,
-            }}
+            style={btnStyle(peerOpen)}
           >
             ライブ
           </motion.button>
-
           <AnimatePresence>
             {peerOpen && <PeerPanel onClose={() => setPeerOpen(false)} />}
           </AnimatePresence>
@@ -101,7 +182,7 @@ export function ReadingTable() {
         <motion.button
           whileHover={{ opacity: 1 }} whileTap={{ scale: 0.92 }}
           onClick={handleNotification}
-          title={notifEnabled ? "Disable notifications" : "Enable notifications"}
+          title={notifEnabled ? "通知オフ" : "通知オン"}
           style={{
             padding: "5px 8px",
             background: "transparent",
@@ -152,9 +233,25 @@ export function ReadingTable() {
     }}>
       {topBar}
 
+      {/* Mobile: spread selector below top bar */}
+      {isMobile && (
+        <div style={{
+          display: "flex",
+          gap: 4,
+          padding: "6px 14px",
+          borderBottom: "1px solid rgba(255,255,255,0.03)",
+          background: "rgba(5,6,9,0.4)",
+          overflowX: "auto",
+          flexShrink: 0,
+          zIndex: 20,
+        }}>
+          <SpreadSelector />
+        </div>
+      )}
+
       {isMobile ? (
         <>
-          <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+          <div ref={spreadAreaRef} style={{ flex: 1, position: "relative", overflow: "hidden" }}>
             {spreadLabel}
             <SpreadLayout spread={activeSpread} />
             <CardMeaningPanel />
@@ -195,7 +292,7 @@ export function ReadingTable() {
             <DeckControls />
           </div>
 
-          <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+          <div ref={spreadAreaRef} style={{ flex: 1, position: "relative", overflow: "hidden" }}>
             {spreadLabel}
             <SpreadLayout spread={activeSpread} />
             <CardMeaningPanel />
@@ -236,6 +333,12 @@ export function ReadingTable() {
       </AnimatePresence>
 
       <Particles />
+
+      {/* Modals / Overlays */}
+      <AIReadingPanel open={aiOpen} onClose={() => setAiOpen(false)} onSaveReading={handleSaveReading} />
+      <ReadingHistory open={historyOpen} onClose={() => setHistoryOpen(false)} />
+      <DailyCardModal open={dailyOpen} onClose={() => setDailyOpen(false)} />
+      <CardGallery open={galleryOpen} onClose={() => setGalleryOpen(false)} />
     </div>
   );
 }

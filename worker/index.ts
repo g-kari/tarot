@@ -21,11 +21,51 @@ interface Env {
       };
     };
   };
+  AI?: {
+    run(model: string, input: Record<string, unknown>): Promise<{ response?: string }>;
+  };
 }
+
+const READING_SYSTEM_PROMPT = `あなたはプロのタロットリーダーです。引かれたカードの組み合わせから総合的なリーディングを行います。
+各カードの位置（スプレッドの意味）、正位置・逆位置、カード同士の関係性を考慮して、温かく思慮深い解釈を提供してください。
+指定されたテーマに沿った具体的なアドバイスを含めてください。
+回答は日本語で、300〜500文字程度にまとめてください。箇条書きは使わず、自然な文章で書いてください。`;
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+
+    // AI tarot reading endpoint
+    if (url.pathname === "/api/reading" && request.method === "POST") {
+      if (!env.AI) {
+        return Response.json({ error: "AI binding not configured" }, { status: 503 });
+      }
+      try {
+        const body = await request.json() as {
+          cards: { name: string; position: string; isReversed: boolean }[];
+          spreadName: string;
+          theme: string;
+        };
+
+        const cardDescriptions = body.cards.map((c, i) =>
+          `${i + 1}. ${c.position}：${c.name}（${c.isReversed ? "逆位置" : "正位置"}）`
+        ).join("\n");
+
+        const userPrompt = `【テーマ】${body.theme}\n【スプレッド】${body.spreadName}\n【引いたカード】\n${cardDescriptions}\n\n上記のカードからリーディングをお願いします。`;
+
+        const result = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+          messages: [
+            { role: "system", content: READING_SYSTEM_PROMPT },
+            { role: "user", content: userPrompt },
+          ],
+          max_tokens: 800,
+        });
+
+        return Response.json({ reading: result.response ?? "" });
+      } catch {
+        return Response.json({ error: "AI reading failed" }, { status: 500 });
+      }
+    }
 
     // Image optimization via Cloudflare Images binding.
     // The parseImageParams validation inside handleImageOptimization
