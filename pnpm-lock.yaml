@@ -18,8 +18,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       '@vitejs/plugin-rsc':
-        specifier: ^0.5.23
-        version: 0.5.38(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))
+        specifier: ^0.5.39
+        version: 0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -37,7 +37,7 @@ importers:
         version: 19.3.1(react@19.3.1)
       vinext:
         specifier: ^0.2.0
-        version: 0.2.1(@vitejs/plugin-react@6.2.1(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(@vitejs/plugin-rsc@0.5.38(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite-tsconfig-paths@6.1.1(supports-color@10.2.2)(typescript@5.9.3)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))
+        version: 0.2.1(@vitejs/plugin-react@6.2.1(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite-tsconfig-paths@6.1.1(supports-color@10.2.2)(typescript@5.9.3)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))
       vite:
         specifier: ^7
         version: 7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)
@@ -1229,8 +1229,8 @@ packages:
       oxc-transform-react:
         optional: true
 
-  '@vitejs/plugin-rsc@0.5.38':
-    resolution: {integrity: sha512-SoiRBJBVd3Qg6Frnvdk6LwugJYlQKgee+uqySxKz5T/KsCZUgdw529Klzg4IDJuP/EOfsIJ2YiOKAFY8tnr1kg==}
+  '@vitejs/plugin-rsc@0.5.39':
+    resolution: {integrity: sha512-hRa6CK119r1NkwgPWlPRiDP8e4rELCsIZwjGmQK0sOnayAkYPBkyJMip0GhYEt2ukBZaO0Uw3ICHHO9T692OFw==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -3591,7 +3591,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.1
       vite: 7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)
 
-  '@vitejs/plugin-rsc@0.5.38(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))':
+  '@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
       es-module-lexer: 3.0.4
@@ -5265,7 +5265,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vinext@0.2.1(@vitejs/plugin-react@6.2.1(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(@vitejs/plugin-rsc@0.5.38(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite-tsconfig-paths@6.1.1(supports-color@10.2.2)(typescript@5.9.3)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)):
+  vinext@0.2.1(@vitejs/plugin-react@6.2.1(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite-tsconfig-paths@6.1.1(supports-color@10.2.2)(typescript@5.9.3)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)))(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)):
     dependencies:
       '@unpic/react': 1.0.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@vercel/og': 0.8.6
@@ -5279,7 +5279,7 @@ snapshots:
       vite-plugin-commonjs: 0.10.4
       web-vitals: 4.2.4
     optionalDependencies:
-      '@vitejs/plugin-rsc': 0.5.38(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))
+      '@vitejs/plugin-rsc': 0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))
       vite-tsconfig-paths: 6.1.1(supports-color@10.2.2)(typescript@5.9.3)(vite@7.3.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1))
     transitivePeerDependencies:
       - next
