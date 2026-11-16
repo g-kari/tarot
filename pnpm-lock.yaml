@@ -36,8 +36,8 @@ importers:
         specifier: ^19.2.4
         version: 19.3.1(react@19.3.1)
       vinext:
-        specifier: ^1.0.0
-        version: 1.4.4(@types/node@26.6.6)(@vitejs/plugin-react@6.2.1(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1))
+        specifier: ^1.4.5
+        version: 1.4.5(@types/node@26.6.6)(@vitejs/plugin-react@6.2.1(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1))
       vite:
         specifier: ^8.0.0
         version: 8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)
@@ -2666,8 +2666,8 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
-  vinext@1.4.4:
-    resolution: {integrity: sha512-mmnYmAGwpooZ8mrnVs+Z8grEaHwf5rIIcxgYZgm0mlWtYzxX+dThmldv4TgfChGyGmo3KtZEeSxzQfTL7lz2hw==}
+  vinext@1.4.5:
+    resolution: {integrity: sha512-UI0KPA8tEgJshULtt89xKl854sGyF4AUak6UkNNuzWstXgV/00klmsqtXk3YyCXGicvDaBI2/eJmTpCy0ol++Q==}
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
@@ -5519,7 +5519,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vinext@1.4.4(@types/node@26.6.6)(@vitejs/plugin-react@6.2.1(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)):
+  vinext@1.4.5(@types/node@26.6.6)(@vitejs/plugin-react@6.2.1(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.47.1)):
     dependencies:
       '@unpic/react': 1.0.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@vercel/og': 1.0.3(@types/node@26.6.6)
